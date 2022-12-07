@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.6'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'war'
 }
 
 group = 'com.atech'
@@ -35,14 +36,14 @@ tasks.named('test') {
 }
 
 // war 빌드 설정
-bootJar{
+bootWar{
 	archivesBaseName = 'turkey'
-	archiveFileName = 'turkey.jar'
+	archiveFileName = 'turkey.war'
 	archiveVersion = "0.0.1"
 }
 
 apply plugin: 'war'
-bootWar.enabled = false
+bootWar.enabled = true
 war.enabled = true
 
 // 리액트 + 스프링부트 빌드 파일 설정
@@ -67,7 +68,9 @@ task installReact(type: Exec) {
 		commandLine 'npm.cmd', 'update'
 	}
 	else {
-		commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
+		commandLine "npm", "audit", "fix"
+		commandLine 'npm', 'install'
+		commandLine 'npm.cmd', 'update'
 	}
 }
 
