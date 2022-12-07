@@ -1,0 +1,46 @@
+/*.my-license-contents * {*/
+/*    outline: 1px solid red;*/
+/*}*/
+.my-license-contents {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+}
+.my-license-contents .title {
+    text-align: start;
+    font-size: 24px;
+    font-weight: bold;
+}
+.my-license-contents .user-info {
+    width: 20%;
+    padding: 18px 0;
+}
+.my-license-contents .user-info .name{
+    text-align: start;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+.my-license-contents .user-info .belong{
+    text-align: start;
+    padding: 1px;
+    font-size: 10px;
+    color: rgba(57, 59, 65, 0.85);
+}
+
+.my-license-table {
+    font-size: 16px;
+    border-collapse: collapse;
+}
+.my-license-table thead {
+    background-color: var(--main-bg-color);
+    color: white;
+}
+.btn-solution-link {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(11, 19, 66, 0.68);
+    padding: 6px;
+    border: none;
+}

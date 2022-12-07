@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: rest-api
+  datasource:
+    url: jdbc:mysql://172.30.1.108:3306/turkey?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: atech
+    password: dpdlxpzm1221!@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+---
+
+spring:
+  profiles:
+    active: prod
+
+---
+
+spring:
+  profiles:
+    active: test
+
+---
+
+spring:
+  profiles:
+    active: dev

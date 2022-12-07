@@ -1,0 +1,10 @@
+.management-contents {
+    width: 100%;
+    margin: 56px auto;
+}
+.grid-wrap {
+    width: 100%;
+    max-width: 1000px;
+    height: 700px;
+    margin: 28px auto;
+}

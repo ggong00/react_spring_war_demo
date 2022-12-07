@@ -1,0 +1,85 @@
+# /
+.vscode/
+
+# / - STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# / - IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+ 
+# /backend/
+backend/HELP.md
+backend/.gradle
+backend/build/
+backend/logs/
+!backend/gradle/wrapper/gradle-wrapper.jar
+!backend/**/src/main/**/build/
+!backend/**/src/test/**/build/
+
+# /backend/ - NetBeans
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+
+# /backend/ - IntelliJ IDEA
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+backend/out/
+!backend/**/src/main/**/out/
+!backend/**/src/test/**/out/
+
+# /frontend/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# dependencies
+/backend/src/main/frontend/node_modules
+/backend/src/main/frontend/.pnp
+/backend/src/main/frontend/.pnp.js
+
+# /frontend/ - testing
+/backend/src/main/frontend/coverage
+
+# /frontend/ - production
+/backend/src/main/frontend/build
+/backend/src/main/resources/static
+
+# /frontend/ - misc
+/backend/src/main/frontend/.DS_Store
+/backend/src/main/frontend/.env.local
+/backend/src/main/frontend/.env.development.local
+/backend/src/main/frontend/.env.test.local
+/backend/src/main/frontend/.env.production.local
+
+/backend/src/main/frontend/npm-debug.log*
+/backend/src/main/frontend/yarn-debug.log*
+/backend/src/main/frontend/yarn-error.log*
+
+/backend/src/main/frontend/package-lock.json
+
+# /nginx/
+frontend/build/**/*
+!frontend/build/README.md
+
+# db
+vol_db
+
+# etc
+build

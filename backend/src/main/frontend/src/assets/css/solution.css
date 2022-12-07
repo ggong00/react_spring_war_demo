@@ -1,0 +1,119 @@
+/* 솔루션 선택 */
+#route-contents .top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+#route-contents .top-nav li {
+    cursor: pointer;
+    width: 33%;
+    text-align: center;
+    padding: 8px 48px;
+}
+#route-contents .selected {
+    background-color: var(--main-bg-color);
+    color: white;
+    transition: all 0.5s;
+}
+
+/* 메인 컨텐츠 */
+.solution-contents {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin: 56px auto;
+    padding: 8px 0;
+}
+.section-header {
+    color: black;
+    text-align: start;
+    width: 100%;
+    margin: 82px auto 8px auto;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+/* 슬라이더 */
+.custom-slider {
+    width: 50%;
+    margin-right: 48px;
+}
+.custom-slider .title {
+    margin: 24px;
+}
+.custom-slider img {
+    width: 100%;
+    height: 400px;
+    padding: 0 18px;
+}
+.custom-slider .slick-prev:before,
+.custom-slider .slick-next:before {
+    font-size: 24px;
+    color: black;
+}
+
+/* 섹션2 */
+.section2 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 42px;
+
+}
+/* 솔루션 정보 */
+.solution-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.solution-detail li {
+    padding: 18px 12px;
+    text-align: start;
+    margin: 4px;
+    background-color: #dbdee3;
+
+}
+.solution-detail li:before {
+    content: "* ";
+}
+.question-wrap {
+    display: flex;
+    justify-content: start;
+}
+.question-wrap .btn-question{
+    cursor: pointer;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: bolder;
+    background-color: var(--main-bg-color);
+    color: white;
+    border: none;
+    margin: 12px 4px;
+
+}
+
+/* 섹션3 */
+.section3 {
+    width: 100%;
+    margin: 56px 0;
+}
+
+/* 구독설명 */
+.license-info-table {
+    width: 100%;
+    font-size: 18px;
+    border-collapse: collapse;
+    border: 1px solid rgba(68, 68, 68, 0.38);
+}
+.license-info-table td,tr {
+    border: 1px solid rgba(68, 68, 68, 0.38);
+    padding: 8px;
+}
+.license-info-table thead {
+    background-color: var(--main-bg-color);
+    color: white;
+}
