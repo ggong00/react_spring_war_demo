@@ -42,13 +42,31 @@
     width: 50%;
     margin-right: 48px;
 }
-.custom-slider .title {
-    margin: 24px;
+.custom-slider .img-box {
+    position: relative;
+    padding: 0 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.custom-slider .img-box:hover {
+    transform: scale(1.02);
+}
+.custom-slider .img-box .title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 18px;
+    padding: 6px;
+    font-weight: lighter;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgb(49, 55, 59);
+    color: #dbdee3;
+    border-radius: 6px;
 }
 .custom-slider img {
     width: 100%;
     height: 400px;
-    padding: 0 18px;
 }
 .custom-slider .slick-prev:before,
 .custom-slider .slick-next:before {
@@ -61,7 +79,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    padding: 42px;
+    padding: 0 42px;
 
 }
 /* 솔루션 정보 */
@@ -71,7 +89,7 @@
     height: 100%;
 }
 .solution-detail li {
-    padding: 18px 12px;
+    padding: 6px 12px;
     text-align: start;
     margin: 4px;
     background-color: #dbdee3;
@@ -93,7 +111,6 @@
     color: white;
     border: none;
     margin: 12px 4px;
-
 }
 
 /* 섹션3 */

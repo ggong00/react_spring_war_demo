@@ -228,6 +228,10 @@ input:read-only, textarea:read-only {
   margin-top: 0.5em;
 }
 
+.modal-xxl {
+  max-width: 1440px;
+}
+
 .modal-xl {
   max-width: 1140px;
 }
@@ -282,6 +286,7 @@ input:read-only, textarea:read-only {
   cursor: pointer;
 }
 .modal > section main {
+  position: relative;
   max-height: 800px;
   overflow: scroll;
   padding-bottom: 2em;
@@ -361,6 +366,31 @@ input:read-only, textarea:read-only {
   align-items: center;
   -webkit-animation: modal-bg-show 0.3s;
   animation: modal-bg-show 0.3s;
+}
+
+/* 이미지 모달 */
+.modal > section.image-modal main {
+  position: relative;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  transition: all 0.4s;
+}
+.modal > section.image-modal header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  transition: all 0.4s;
+  margin: 0 auto;
+  font-size: 3em;
+  padding: 16px;
+}
+.modal > section.image-modal header .title {
+  justify-self: flex-start;
+}
+.modal > section.image-modal header button{
+  padding: 0;
 }
 
 @-webkit-keyframes modal-show {
