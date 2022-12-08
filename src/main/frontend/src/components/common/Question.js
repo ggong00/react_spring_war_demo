@@ -3,33 +3,15 @@ import { useForm, Controller } from "react-hook-form";
 import "../../assets/css/question.css"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import QuestionFooter from "../question/QuestionFooter";
+import QuestionFooter from "./QuestionFooter";
 
-function Question({data, id}) {
+function Question({data, id, userInfo, mode}) {
     const [ solution, setSolution ] = useState([]);
-    const [ loginUser, setLoginUser ] = useState({});
     const { register, handleSubmit, reset, control,formState: { isSubmitting, isDirty, errors }} = useForm({
-        defaultValues: useMemo(() => loginUser),
+        defaultValues: useMemo(() => userInfo),
     });
 
     useEffect(() => {
-        // 로그인 유저 정보 조회
-        if (localStorage.getItem("user") && !data) {
-            fetch("/api/user", {
-                method : 'get',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    if (json.data) {
-                        setLoginUser(json.data);
-                        reset(json.data);
-                    }
-                });
-        }
-
         // 솔루션 정보 조회
         fetch("/api/solution", {
             method : 'get',
@@ -43,11 +25,13 @@ function Question({data, id}) {
                     setSolution(json.data);
                 }
             });
+
     }, []);
 
     // 문의글 작성
     const onsubmit = (formData) => {
         const user = localStorage.getItem("user") || null;
+        console.log(formData)
 
         fetch("/api/question", {
             method : 'post',
@@ -59,8 +43,8 @@ function Question({data, id}) {
             .then((res) => res.json())
             .then((json) => {
                 if (json.code == "00") {
-                    alert("정상적으로 처리되었습니다.");
-                    window.location.reload();
+                    alert("답변은 이메일로 보내드립니다.");
+                    window.location = "/";
                 }
             }
             )
@@ -98,7 +82,7 @@ function Question({data, id}) {
                         type="text"
                         name="belong"
                         disabled={data && true}
-                        defaultValue={data ? data.belong : loginUser?.belong}
+                        defaultValue={data ? data.belong : userInfo?.belong}
                         {...register("belong", {
                             required: "소속을 입력해주세요.",
                         })}
@@ -112,7 +96,7 @@ function Question({data, id}) {
                         type="text"
                         name="name"
                         disabled={data && true}
-                        defaultValue={data ? data.name : loginUser?.name}
+                        defaultValue={data ? data.name : userInfo?.name}
                         {...register("name", {
                             required: "이름을 입력해주세요.",
                         })}
@@ -133,7 +117,7 @@ function Question({data, id}) {
                         type="text"
                         name="position"
                         disabled={data && true}
-                        defaultValue={data ? data.position : loginUser?.position}
+                        defaultValue={data ? data.position : userInfo?.position}
                         {...register("position", {
                             required: "칙책을 입력해주세요.",
 
@@ -155,7 +139,7 @@ function Question({data, id}) {
                                 initialValueFormat="national"
                                 onChange={onChange}
                                 disabled={data && true}
-                                value={data ? data.tel : loginUser?.tel}
+                                value={data ? data.tel : userInfo?.tel}
                                 defaultCountry="TR"
                             />
                         )}
@@ -175,7 +159,7 @@ function Question({data, id}) {
                         type="email"
                         name="email"
                         disabled={data && true}
-                        defaultValue={data ? data.email : loginUser?.email}
+                        defaultValue={data ? data.email : userInfo?.email}
                         {...register("email", {
                             required: "이메일을 입력해주세요.",
 
@@ -219,7 +203,7 @@ function Question({data, id}) {
 
                 </div>
             </div>
-            {!data && <QuestionFooter errors={errors} register={register}/>}
+            {!data && <QuestionFooter errors={errors} register={register} mode={mode} />}
         </form>
     );
 }

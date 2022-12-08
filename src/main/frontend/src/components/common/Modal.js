@@ -16,8 +16,14 @@ function Modal(props) {
                             &times;
                         </button>
                     </header>
-                    {modal.type == "question" && <main><Question id={modal.id}/></main>}
-                    {modal.type == "management" && <main><ManagementModal data={modal.data} close={close}/></main>}
+                    {
+                        modal.type == "question" && 
+                        <main><Question id={modal.id} mode='modal' userInfo={modal.userInfo}/></main>
+                    }
+                    {
+                        modal.type == "management" && 
+                        <main><ManagementModal data={modal.data} close={close}/></main>
+                    }
                 </section>
             ) : null}
         </div>

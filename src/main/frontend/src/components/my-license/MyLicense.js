@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../assets/css/my-license.css";
 
-function MyLicense(props) {
+function MyLicense({userInfo}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -35,8 +35,8 @@ function MyLicense(props) {
             <div className="my-license-contents">
                 <div className="title">마이페이지</div>
                 <div className="user-info">
-                    <div className="name">이재진</div>
-                    <div className="belong">에이테크</div>
+                    <div className="name">{userInfo?.name}</div>
+                    <div className="belong">{userInfo?.belong}</div>
                 </div>
                 <table className="my-license-table">
                     <thead>

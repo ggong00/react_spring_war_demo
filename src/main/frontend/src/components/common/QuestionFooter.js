@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Button from "../common/Button";
+import Button from "./Button";
 
 function QuestionFooter(props) {
-    const {errors, register} = props
+    const {errors, register, mode} = props
 
     return (
         <>
@@ -21,7 +21,7 @@ function QuestionFooter(props) {
             {errors.agree && <div className="error-box">{errors.agree.message}</div>}
 
             <div className="btn-group">
-                <Button title="문의하기" backgroundColor="var(--main-bg-color)"/>
+                <Button title={mode == 'modal' ? '신청하기' : '문의하기'} backgroundColor="var(--main-bg-color)"/>
             </div>
         </>
     )

@@ -34,27 +34,8 @@ public class UserController {
         }
 
         return new ResponseEntity(
-                ResponseMsg.create(ResponseCode.SUCCESS, true),
+                ResponseMsg.create(ResponseCode.SUCCESS, userInfoRes),
                 HttpStatus.OK
         );
     }
-
-    @GetMapping("/api/user")
-    public ResponseEntity findUser() {
-        UserDTO.UserInfoRes userInfoRes = userService.loginChk();
-
-            if (userInfoRes == null) {
-
-                return new ResponseEntity(
-                        ResponseMsg.create(ResponseCode.SUCCESS, false),
-                        HttpStatus.OK
-                );
-
-            }
-
-            return new ResponseEntity(
-                    ResponseMsg.create(ResponseCode.SUCCESS, userInfoRes),
-                    HttpStatus.OK);
-        }
-
 }
