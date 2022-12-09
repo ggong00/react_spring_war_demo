@@ -103,7 +103,7 @@ html {
 /* border */
 /* table */
 th,td {
-  border: 1px solid rgba(68, 68, 68, 0.38);
+  /*border: 1px solid rgba(68, 68, 68, 0.38);*/
   padding: 8px;
 }
 .tbl {
@@ -193,7 +193,7 @@ input:read-only, textarea:read-only {
 /* FRAME */
 body {
   position: relative;
-  font-family: "HallymGothic";
+  font-family: "Pretendard";
   font-size: 14px;
   font-weight: 500;
 }
@@ -217,20 +217,23 @@ body {
 /* NAV */
 .navbar-wrap {
   width: 100%;
-  background-color: rgba(178, 178, 178, 0.59);
+  /*background-color: rgba(178, 178, 178, 0.59);*/
+  border-bottom: 1px solid #eaeaea;
 }
 .navbar {
-  width: 70%;
+  height: 80px;
+  /*width: 70%;
   min-height: 6.25em;
   padding-right: 1em;
   padding-left: 1em;
-  margin: 0 auto;
+  margin: 0 auto;*/
 }
 .navbar #logo {
-  height: 32px;
-  width: 9em;
-  padding-top: 0.125em;
-  padding-bottom: 0.125em;
+  /*height: 32px;*/
+  /*width: 9em;*/
+  /*padding-top: 0.125em;*/
+  /*padding-bottom: 0.125em;*/
+  height: 1.25em;
 }
 .navbar #logo a {
   display: flex;
@@ -268,11 +271,12 @@ body {
   margin-left: 0;
 }
 .navbar .navbar_quick ul li a {
-  padding: 0.5em 1.25em;
+  /*padding: 0.5em 1.25em;*/ padding: .5em 1.5em;
   border-width: 1px;
   border-style: solid;
   border-color: rgba(35, 34, 34, 0.26);
   border-radius: 5em;
+  font-size: 1.0625em;
 }
 .navbar .navbar_quick a {
   display: flex;
@@ -290,9 +294,12 @@ body {
 .selected-menu {
   border-bottom: 2px solid #000000;
 }
-.top-nav li{
-  border: 1px solid rgba(93, 97, 105, 0.26);
+.top-nav li {
+  /*border: 1px solid rgba(93, 97, 105, 0.26);*/ border: 1px solid #ddd;
+  /*border-left: 0;*/
 }
+.top-nav li:first-child {border-left: 1px solid #ddd;}
+
 
 /* SIDEBAR */
 #sidebarWrap {
@@ -383,9 +390,12 @@ body {
 
 /* PAGE */
 #route-contents {
-  margin: 40px auto;
-  width: 60%;
+  /*margin: 40px auto;*/ padding: 6em 0; background: #F5F7F9;
+  /*width: 60%;*/
 }
+
+#route-contents h2 {font-size: 2.5em; margin-bottom: 1em; }
+
 #contents-title {
   font-size: 24px;
   font-weight: bold;

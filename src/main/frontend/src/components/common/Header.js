@@ -27,51 +27,52 @@ function Header({menu}) {
 
     return (
         <div className="navbar-wrap">
-            <nav className="navbar flxCnt" id="gnb">
-                <h1 className="navbar-header" id="logo">
-                    <a href="/">
-                        <img src={require("../../assets/img/common/logo.png")} />
-                    </a>
-                </h1>
+            <div className="container">
+                <nav className="navbar flxCnt" id="gnb">
+                    <h1 className="navbar-header" id="logo">
+                        <a href="/">
+                            <img src={require("../../assets/img/common/logo.png")} />
+                        </a>
+                    </h1>
 
-                <div className="gnb">
-                    <ul className="menu">
-                        {menu.map((menu) => {
-                            return (
-                                <li key={menu.id}>
-                                    <Link
-                                        to={menu.url}
-                                        id={menu.id}
-                                        onClick={changeMenu}
-                                        className={selectedMenu == menu.id ? "selected-menu" : ""}
-                                    >
-                                        {menu.name}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
+                    <div className="gnb">
+                        <ul className="menu">
+                            {menu.map((menu) => {
+                                return (
+                                    <li key={menu.id}>
+                                        <Link
+                                            to={menu.url}
+                                            id={menu.id}
+                                            onClick={changeMenu}
+                                            className={selectedMenu == menu.id ? "selected-menu" : ""}
+                                        >
+                                            {menu.name}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
 
-                <div className="navbar_quick">
-                    <ul>
-                        {!localStorage.getItem("user") ? (
-                            <>
-                                <li>
-                                    <Link to="/login">로그인</Link>
-                                </li>
-                            </>
-                        ) : (
-                            <>
-                                <li>
-                                    <a onClick={onLogout}>로그아웃</a>
-                                </li>
-                            </>
-                        )}
-                    </ul>
-                </div>
-
-            </nav>
+                    <div className="navbar_quick">
+                        <ul>
+                            {!localStorage.getItem("user") ? (
+                                <>
+                                    <li>
+                                        <Link to="/login">로그인</Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li>
+                                        <a onClick={onLogout}>로그아웃</a>
+                                    </li>
+                                </>
+                            )}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
     );
 }

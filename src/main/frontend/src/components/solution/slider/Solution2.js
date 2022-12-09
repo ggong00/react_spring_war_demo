@@ -7,7 +7,7 @@ import Solution2_5 from "../../../assets/img/solution/코리아피앤시/5_프�
 
 function Solution2() {
     const sliderSettings = {
-        dots: true,
+        // dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,

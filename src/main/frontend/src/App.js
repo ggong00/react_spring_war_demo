@@ -1,6 +1,7 @@
 import {Routes, Route, Navigate } from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import './App.css';
+import "./assets/css/font.css";
 import "./assets/css/common.css";
 import Header from "./components/common/Header";
 import Login from "./components/login/Login";
