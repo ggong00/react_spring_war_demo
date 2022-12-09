@@ -9,7 +9,7 @@ import Solution1_7 from "../../../assets/img/solution/선재하이테크/7_BOM�
 
 function Solution1() {
     const sliderSettings = {
-        dots: true,
+        // dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,

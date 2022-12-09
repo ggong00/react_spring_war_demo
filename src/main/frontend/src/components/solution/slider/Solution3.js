@@ -7,7 +7,7 @@ import Solution3_5 from "../../../assets/img/solution/한국섬유개발원/5_�
 
 function Solution3() {
     const sliderSettings = {
-        dots: true,
+        // dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
