@@ -18,7 +18,6 @@
     align-items: center;
     font-weight: bolder;
     padding: 0 12px;
-
 }
 
 /* 카테고리 선택 */
@@ -56,7 +55,7 @@
     flex-wrap: wrap;
 }
 .input-box.text .title {
-    flex: 1.5;
+    width: 80px;
 }
 .input-box.text .input {
     flex: 8;
@@ -66,10 +65,10 @@
     padding: 8px;
     border-radius: 12px;
 }
-.input-box .title:after {
+/* .input-box .title:after {
     content: "*";
     color: var(--main-bg-color);
-}
+} */
 
 /* 내용 입력 */
 .input-box.contents-box {

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserGear } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../../components/common/Modal";
 import "../../assets/css/my-license.css";
 
 function MyLicense({userInfo}) {
-    const [data, setData] = useState([]);
+    const [userdata, setUserData] = useState([]);
+    const [modal, setModal] = useState({})
 
     useEffect(() => {
         const role = localStorage.getItem("role");
@@ -20,7 +24,7 @@ function MyLicense({userInfo}) {
             .then((res) => res.json())
             .then((json) => {
                 if (json.code == "00") {
-                    setData(json.data);
+                    setUserData(json.data);
                 }
             });
     }
@@ -30,13 +34,32 @@ function MyLicense({userInfo}) {
         window.open(link, "_blank");
     }
 
+      // 모달
+      const openModal = () => {
+        setModal({
+            ...modal,
+            type: 'my-license',
+            userInfo: userInfo,
+            status : true
+        });
+    };
+    const closeModal = () => {
+        setModal({
+            ...modal,
+            status : false
+        });
+    };
+
     return (
         <div id="route-contents">
             <div className="my-license-contents">
                 <div className="title">마이페이지</div>
-                <div className="user-info">
-                    <div className="name">{userInfo?.name}</div>
-                    <div className="belong">{userInfo?.belong}</div>
+                <div className="user">
+                    <div className="user-info">
+                        <div className="name">{userInfo?.name}</div>
+                        <div className="belong">{userInfo?.belong}</div>
+                    </div>
+                    <div className="edit-info" onClick={openModal}><FontAwesomeIcon icon={faUserGear}/></div>
                 </div>
                 <table className="my-license-table">
                     <thead>
@@ -51,7 +74,7 @@ function MyLicense({userInfo}) {
                     </thead>
                     <tbody>
                     {
-                        data
+                        userdata
                         .map((ele,idx) => {
                             return (
                                 <tr key={ele.myLicenseId}>
@@ -78,6 +101,14 @@ function MyLicense({userInfo}) {
                     </tbody>
                 </table>
             </div>
+
+            <Modal
+                open={modal.status}
+                close={closeModal}
+                header="내 정보 수정"
+                modal={modal}
+            >
+            </Modal>
         </div>
     );
 }

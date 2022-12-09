@@ -1,0 +1,24 @@
+.edit-form-menu {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px;
+}
+.edit-form-menu li{
+    padding: 12px;
+}
+
+/* 비밀번호 변경 */
+.form-box.pass .input-box{
+    justify-content: center;
+}
+.form-box.pass .title {
+    flex: none;
+    width: 20%;
+}
+.form-box.pass .input {
+    flex: none;
+    width: 40%;
+}
+

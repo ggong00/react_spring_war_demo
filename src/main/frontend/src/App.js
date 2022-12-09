@@ -59,6 +59,7 @@ function App() {
         .then((res) => res.json())
         .then((json) => {
           if (!json.data) {
+            alert('세션이 끊겼습니다.')
             localStorage.removeItem("user");
             localStorage.removeItem("role");
           } else {

@@ -4,13 +4,13 @@ import CreateUser from "../CreateUser";
 import CreateLicense from "../CreateLicense";
 import "../../../assets/css/management-modal.css"
 
-function ManagementModal({data, close, reload}) {
+function ManagementModal({data, close}) {
 
     return (
         <>
             <Question data={data}/>
             <CreateUser data={data}/>
-            <CreateLicense data={data} close={close} reload={reload}/>
+            <CreateLicense data={data} close={close}/>
         </>
     );
 }

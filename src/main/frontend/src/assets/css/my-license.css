@@ -12,17 +12,34 @@
     font-size: 24px;
     font-weight: bold;
 }
-.my-license-contents .user-info {
-    width: 20%;
+.my-license-contents .user {
+    display: flex;
+}
+.my-license-contents .user .edit-info{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin: 12px;
+    color: rgba(85, 83, 83, 0.548);
+    transition: all 0.3s;
+}
+.my-license-contents .user .edit-info:hover {
+    color: rgb(0, 0, 0);
+}   
+.my-license-contents .user .user-info{
+    display: flex;
+    flex-direction: column;
     padding: 18px 0;
 }
-.my-license-contents .user-info .name{
+.my-license-contents .user .user-info .name{
     text-align: start;
     font-weight: bold;
     font-size: 20px;
 
 }
-.my-license-contents .user-info .belong{
+.my-license-contents .user .user-info .belong{
     text-align: start;
     padding: 1px;
     font-size: 10px;
