@@ -30,13 +30,14 @@ public class LicenseDTO {
     @Getter
     @Setter
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     @ToString
     public static class MyLicenseReq {
         private Long solutionId;
         private Long questionId;
         private String userId;
-        private String tel;
+        private String email;
         private String siteId;
         private String sitePass;
         private String siteUrl;

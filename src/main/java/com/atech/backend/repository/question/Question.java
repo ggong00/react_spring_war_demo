@@ -8,12 +8,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Question {
+
+    public final static String STATUS_SUCCESS = "SUCCESS";
+    public final static String STATUS_DELETE = "DELETE";
+    public final static String STATUS_NEW = "NEW";
+    public final static String STATUS_ALL = "ALL";
+
     private Long questionId;
     private Solution solution;
     private User user;
@@ -41,6 +48,8 @@ public class Question {
                 .belong(this.belong)
                 .title(this.title)
                 .contents(this.contents)
+                .resYn(this.resYn)
+                .createDtm(this.createDtm.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .build();
     }
 }

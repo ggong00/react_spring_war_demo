@@ -2,6 +2,7 @@ package com.atech.backend.config.security.login;
 
 import com.atech.backend.config.security.CustomAuthenticationFailureHandler;
 import com.atech.backend.config.security.CustomAuthenticationSuccessHandler;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

@@ -48,6 +48,9 @@
 .input-box input,textarea {
     border: 1px solid rgba(93, 97, 105, 0.38);
 }
+.input-box input[disabled],textarea[disabled] {
+    background-color: #00000015;
+}
 .input-box input,textarea:focus {
     outline: none;
 }
@@ -65,10 +68,11 @@
     padding: 8px;
     border-radius: 12px;
 }
-/* .input-box .title:after {
+.input-box .title.essential:after {
     content: "*";
     color: var(--main-bg-color);
-} */
+    font-size: 1.4em;
+}
 
 /* 내용 입력 */
 .input-box.contents-box {

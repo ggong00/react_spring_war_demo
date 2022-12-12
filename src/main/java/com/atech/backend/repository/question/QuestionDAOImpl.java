@@ -1,5 +1,6 @@
 package com.atech.backend.repository.question;
 
+import com.atech.backend.dto.QuestionDTO;
 import com.atech.backend.repository.solution.Solution;
 import com.atech.backend.repository.user.User;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +47,14 @@ public class QuestionDAOImpl implements QuestionDAO{
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT t1.*, t2.solution_name FROM question t1 ");
         sql.append(" INNER JOIN solution t2 on t1.solution_id = t2.solution_id ");
-        sql.append(" WHERE res_yn = ? ");
+        sql.append(" WHERE res_yn like ? ");
+
+        if(status.equals(Question.STATUS_ALL)) {
+            status = "%%";
+            sql.append(" AND res_yn != 'DELETE' ");
+        }
+
+        sql.append(" ORDER BY create_dtm ");
 
         List<Question> questionList = jdbcTemplate.query(sql.toString(), new RowMapper<Question>() {
             @Override
@@ -79,9 +87,10 @@ public class QuestionDAOImpl implements QuestionDAO{
     @Override
     public Integer deleteQuestion(Long questionId) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" DELETE FROM question ");
+        sql.append(" UPDATE question ");
+        sql.append(" SET res_yn = ? ");
         sql.append(" where question_id = ? ");
 
-        return jdbcTemplate.update(sql.toString(), questionId);
+        return jdbcTemplate.update(sql.toString(), Question.STATUS_DELETE ,questionId);
     }
 }

@@ -8,10 +8,6 @@ import lombok.*;
 @Data
 public class QuestionDTO {
 
-    public final static String STATUS_SUCCESS = "SUCCESS";
-    public final static String STATUS_DELETE = "DELETE";
-    public final static String STATUS_NEW = "NEW";
-
     @Getter
     @AllArgsConstructor
     @Builder
@@ -27,10 +23,13 @@ public class QuestionDTO {
         private String email;
         private String title;
         private String contents;
+        private String resYn;
+        private String createDtm;
     }
 
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     @ToString
     public static class QuestionReq {

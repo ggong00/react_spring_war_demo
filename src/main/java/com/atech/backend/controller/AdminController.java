@@ -91,6 +91,24 @@ public class AdminController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/api/admin/userChk")
+    public ResponseEntity userChk(@RequestBody UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        // 유저가 이미 존재하는지 체크
+        if (userService.userDuplChk(userReq)) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.USER_DUPL),
+                    HttpStatus.OK
+            );
+        }
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
+                HttpStatus.OK
+        );
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/admin/create-user")
     public ResponseEntity insert(@RequestBody UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException {
 

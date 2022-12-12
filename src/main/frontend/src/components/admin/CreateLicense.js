@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../common/Button";
 
-function CreateLicense({data, close}) {
-    const { register, handleSubmit, formState: { isSubmitting, isDirty, errors }} = useForm();
+function CreateLicense({data, reload}) {
+    const { register, handleSubmit, getValues, formState: { isSubmitting, isDirty, errors }} = useForm();
 
     const create = (formData) => {
         fetch("/api/admin/license", {
@@ -17,8 +17,7 @@ function CreateLicense({data, close}) {
             .then((json) => {
                 if (json.code == "00") {
                     alert("성공적으로 지급되었습니다.");
-                    close();
-                    window.location.reload();
+                    reload();
                 } else if (json.code == "05-2") {
                     alert("사이트 계정을 먼저 생성해주세요");
                 }
@@ -26,6 +25,15 @@ function CreateLicense({data, close}) {
             .catch(error => {
                 console.log(error)
             });
+    }
+
+    const errorHadle = (error) => {
+        const order = ['siteId', 'sitePass', 'siteUrl'];
+        const first = order
+                        .map(ele => error[ele])
+                        .find(ele => ele);
+
+        alert(first.message);
     }
 
     const onDelete = () => {
@@ -38,8 +46,7 @@ function CreateLicense({data, close}) {
             .then((res) => res.json())
             .then((json) => {
                 if (json.code == "00") {
-                    close();
-                    window.location.reload();
+                    reload();
                 }
             })
             .catch(error => {
@@ -49,26 +56,26 @@ function CreateLicense({data, close}) {
 
     return (
         <>
-            <form className="user-form" onSubmit={handleSubmit(create)}>
+            <form className="user-form" onSubmit={handleSubmit(create,errorHadle)}>
                 <div className="form-header">
                     <div className="form-title">솔루션</div>
                 </div>
                 <div className="form-main">
                     <div className="input">
-                        <label>아이디</label>
+                        <label className="essential">아이디</label>
                         <input
                             type="text"
                             name="siteId"
                             autoComplete="off"
                             {...register("siteId", {
-                                required: "ID는 필수 입력입니다.",
+                                required: "아이디는 필수 입력입니다.",                                                   
                             })}
                         />
                     </div>
                     <div className="input">
-                        <label>비밀번호</label>
+                        <label className="essential">비밀번호</label>
                         <input
-                            type="password"
+                            type="text"
                             name="sitePass"
                             autoComplete="off"
                             {...register("sitePass", {
@@ -77,9 +84,9 @@ function CreateLicense({data, close}) {
                         />
                     </div>
                     <div className="input">
-                        <label>주소</label>
+                        <label className="essential">주소</label>
                         <input
-                            type="test"
+                            type="text"
                             name="siteUrl"
                             autoComplete="off"
                             {...register("siteUrl", {

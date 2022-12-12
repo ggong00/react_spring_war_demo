@@ -1,10 +1,18 @@
 .management-contents {
-    width: 100%;
+    width: 60%;
     margin: 56px auto;
 }
 .grid-wrap {
     width: 100%;
-    max-width: 1000px;
     height: 700px;
     margin: 28px auto;
+}
+.management-contents .status-option {
+    cursor: pointer;
+    display: flex;
+    margin: 4px;
+    font-size: 1em;
+}
+.management-contents .status-option li {
+    padding: 8px;
 }
