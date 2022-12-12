@@ -23,11 +23,14 @@ function Modal(props) {
                     }
                     {
                         modal.type == "management" && 
-                        <main><ManagementModal data={modal.data} close={close}/></main>
+                        <main><ManagementModal 
+                            data={modal.data} 
+                            reload={modal.reload}
+                        /></main>
                     }
                     {
                         modal.type == "my-license" && 
-                        <main><MyLicneseModal userInfo={modal.userInfo} close={close}/></main>
+                        <main><MyLicneseModal userInfo={modal.userInfo} reload={modal.reload}/></main>
                     }
                 </section>
             ) : null}

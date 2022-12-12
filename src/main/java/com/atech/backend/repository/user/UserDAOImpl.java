@@ -49,14 +49,14 @@ public class UserDAOImpl implements UserDAO{
     public Optional<User> userDuplChk(User user) {
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT * FROM user WHERE ");
-        sql.append(" tel = ? ");
+        sql.append(" email = ? ");
 
         Optional<User> optionalUser;
 
         try {
             User result  = jdbcTemplate.queryForObject(sql.toString(),
                     new BeanPropertyRowMapper<>(User.class),
-                    user.getTel()
+                    user.getEmail()
             );
 
             optionalUser = Optional.of(result);
@@ -95,8 +95,6 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void join(User user) {
-        log.info("dao user {} " , user);
-
         StringBuffer sql = new StringBuffer();
         sql.append(" insert into user ");
         sql.append(" (user_id,user_pass,belong,name,position,tel,email,create_dtm) ");
@@ -112,5 +110,43 @@ public class UserDAOImpl implements UserDAO{
                 user.getTel(),
                 user.getEmail()
         );
+    }
+
+    @Override
+    public Integer updateInfo(User user) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" UPDATE user SET");
+        sql.append(" belong = ?, ");
+        sql.append(" name = ?, ");
+        sql.append(" position = ?, ");
+        sql.append(" tel = ? ");
+        sql.append(" where user_id = ? ");
+
+        int resultCnt = jdbcTemplate.update(
+                sql.toString(),
+                user.getBelong(),
+                user.getName(),
+                user.getPosition(),
+                user.getTel(),
+                user.getUserId()
+        );
+
+        return resultCnt;
+    }
+
+    @Override
+    public Integer updatePass(User user) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" UPDATE user SET");
+        sql.append(" user_pass = ? ");
+        sql.append(" where user_id = ? ");
+
+        int resultCnt = jdbcTemplate.update(
+                sql.toString(),
+                user.getUserPass(),
+                user.getUserId()
+        );
+
+        return resultCnt;
     }
 }

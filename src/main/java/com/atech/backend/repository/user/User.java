@@ -31,7 +31,6 @@ public class User implements UserDetails {
         return UserDTO.UserRes
                 .builder()
                 .userId(this.userId)
-                .userPass(this.userPass)
                 .name(this.name)
                 .position(this.position)
                 .tel(this.tel)

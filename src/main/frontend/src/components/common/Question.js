@@ -31,7 +31,6 @@ function Question({data, id, userInfo, mode}) {
     // 문의글 작성
     const onsubmit = (formData) => {
         const user = localStorage.getItem("user") || null;
-        console.log(formData)
 
         fetch("/api/question", {
             method : 'post',
@@ -75,7 +74,7 @@ function Question({data, id, userInfo, mode}) {
             </div>
 
             <div className="input-box text">
-                <div className="title">소속</div>
+                <div className={data ? "title disable" : "title essential"}>소속</div>
                 <div className="input">
                     <input
                         id="belong"
@@ -89,7 +88,7 @@ function Question({data, id, userInfo, mode}) {
                     />
                 </div>
 
-                <div className="title">성함</div>
+                <div className={data ? "title disable" : "title essential"}>성함</div>
                 <div className="input">
                     <input
                         id="name"
@@ -110,7 +109,7 @@ function Question({data, id, userInfo, mode}) {
             </div>
 
             <div className="input-box text">
-                <div className="title">직책</div>
+                <div className={data ? "title disable" : "title essential"}>직책</div>
                 <div className="input">
                     <input
                         id="position"
@@ -124,7 +123,7 @@ function Question({data, id, userInfo, mode}) {
                         })}
                     />
                 </div>
-                <div className="title">핸드폰</div>
+                <div className={data ? "title disable" : "title essential"}>핸드폰</div>
                 <div className="input">
                     <Controller
                         name="tel"
@@ -152,7 +151,7 @@ function Question({data, id, userInfo, mode}) {
             </div>
 
             <div className="input-box text">
-                <div className="title">이메일</div>
+                <div className={data ? "title disable" : "title essential"}>이메일</div>
                 <div className="input">
                     <input
                         id="email"
@@ -166,7 +165,7 @@ function Question({data, id, userInfo, mode}) {
                         })}
                     />
                 </div>
-                <div className="title">제목</div>
+                <div className={data ? "title disable" : "title essential"}>제목</div>
                 <div className="input">
                     <input
                         id="title"
@@ -187,7 +186,7 @@ function Question({data, id, userInfo, mode}) {
             </div>
 
             <div className="input-box contents-box">
-                <div className="title">내용</div>
+                <div className={data ? "title disable" : "title essential"}>내용</div>
                 <div className="input">
                     <textarea
                         id="contents"

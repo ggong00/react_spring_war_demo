@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-function Header({menu}) {
-    const [selectedMenu, setSelectedMenu] = useState();
+function Header({menu, selectedMenu, setSelectedMenu}) {
 
     const onLogout = () => {
         localStorage.removeItem("user")

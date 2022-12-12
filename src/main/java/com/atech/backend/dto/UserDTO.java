@@ -12,7 +12,6 @@ public class UserDTO {
     @Builder
     public static class UserRes{
         private String userId;
-        private String userPass;
         private String name;
         private String position;
         private String tel;
@@ -27,7 +26,6 @@ public class UserDTO {
     @Builder
     public static class UserInfoRes{
         private String userId;
-        private String userPass;
         private String name;
         private String position;
         private String tel;
@@ -39,6 +37,7 @@ public class UserDTO {
 
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     @ToString
     public static class UserReq{

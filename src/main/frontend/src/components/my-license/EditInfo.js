@@ -11,6 +11,23 @@ function EditInfo({userInfo, close}) {
 
     const onsubmit = (formData) => {
         console.log(formData)
+
+        fetch("/api/user/info", {
+            method : 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                if (json.code == "00") {
+                    alert('정보가 성공적으로 수정되었습니다.');
+                    close();
+                }
+            }
+            )
+            .catch(error => {console.log(error)});
     }
 
     return (
@@ -19,7 +36,7 @@ function EditInfo({userInfo, close}) {
             <div className="title">소속</div>
             <div className="input">
                 <input
-                    id="belong"
+                    // id="belong"
                     type="text"
                     name="belong"
                     defaultValue={userInfo?.belong}
@@ -31,7 +48,7 @@ function EditInfo({userInfo, close}) {
             <div className="title">성함</div>
             <div className="input">
                 <input
-                    id="name"
+                    // id="name"
                     type="text"
                     name="name"
                     defaultValue={userInfo?.name}
@@ -50,7 +67,7 @@ function EditInfo({userInfo, close}) {
             <div className="title">직책</div>
             <div className="input">
                 <input
-                    id="position"
+                    // id="position"
                     type="text"
                     name="position"
                     defaultValue={userInfo?.position}
@@ -67,7 +84,7 @@ function EditInfo({userInfo, close}) {
                     rules={{ required: "전화번호를 입력해주세요." }}
                     render={({ field: { onChange, value } }) => (
                         <PhoneInput
-                            id="tel"
+                            // id="tel"
                             type="tel"
                             name="tel"
                             international

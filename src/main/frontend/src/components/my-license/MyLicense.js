@@ -4,8 +4,8 @@ import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../../components/common/Modal";
 import "../../assets/css/my-license.css";
 
-function MyLicense({userInfo}) {
-    const [userdata, setUserData] = useState([]);
+function MyLicense({userInfo, reloadUserInfo}) {
+    const [myLicenseData, setMyLicenseData] = useState([]);
     const [modal, setModal] = useState({})
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function MyLicense({userInfo}) {
             .then((res) => res.json())
             .then((json) => {
                 if (json.code == "00") {
-                    setUserData(json.data);
+                    setMyLicenseData(json.data);
                 }
             });
     }
@@ -40,6 +40,7 @@ function MyLicense({userInfo}) {
             ...modal,
             type: 'my-license',
             userInfo: userInfo,
+            reload: reload,
             status : true
         });
     };
@@ -49,6 +50,16 @@ function MyLicense({userInfo}) {
             status : false
         });
     };
+
+    const reload = () => {
+        setModal({
+            ...modal,
+            status : false
+        });
+
+        reloadUserInfo();
+    };
+
 
     return (
         <div id="route-contents">
@@ -74,7 +85,7 @@ function MyLicense({userInfo}) {
                     </thead>
                     <tbody>
                     {
-                        userdata
+                        myLicenseData
                         .map((ele,idx) => {
                             return (
                                 <tr key={ele.myLicenseId}>

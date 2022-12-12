@@ -16,4 +16,7 @@ public interface UserService {
     boolean idDuplChk(UserDTO.UserReq userReq);
     UserDTO.UserInfoRes loginChk();
     void join(UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    Integer updateInfo(UserDTO.UserReq userReq);
+    Integer updatePass(UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException;
 }

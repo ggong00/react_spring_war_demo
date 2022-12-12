@@ -4,6 +4,7 @@ import com.atech.backend.dto.LicenseDTO;
 import com.atech.backend.dto.QuestionDTO;
 import com.atech.backend.repository.license.LicenseDAO;
 import com.atech.backend.repository.license.MyLicense;
+import com.atech.backend.repository.question.Question;
 import com.atech.backend.repository.question.QuestionDAO;
 import com.atech.backend.repository.user.User;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public Integer createLicense(LicenseDTO.MyLicenseReq myLicenseReq) {
         Integer resultCnt1 = licenseDAO.createLicense(myLicenseReq.toEntity());
-        Integer resultCnt2 = questionDAO.changeStatus(QuestionDTO.STATUS_SUCCESS, myLicenseReq.getQuestionId());
+        Integer resultCnt2 = questionDAO.changeStatus(Question.STATUS_SUCCESS, myLicenseReq.getQuestionId());
 
         return resultCnt1 + resultCnt2;
     }

@@ -10,4 +10,7 @@ public interface UserDAO {
     Optional<User> userDuplChk(User user);
     Optional<User> idDuplChk(User user);
     void join(User user);
+
+    Integer updateInfo(User user);
+    Integer updatePass(User user);
 }
