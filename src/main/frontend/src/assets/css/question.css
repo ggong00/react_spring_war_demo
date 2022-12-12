@@ -84,17 +84,10 @@
     padding: 8px;
     /*border-radius: 12px;*/ border-radius: .25em;
 }
-<<<<<<< HEAD
-.input-box .title.essential:after {
-    content: "*";
-    color: var(--main-bg-color);
-    font-size: 1.4em;
-=======
 .input-box .title:after {
     content: "*";
     color: var(--main-bg-color);
     padding-left: .125em;
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
 }
 
 /* 내용 입력 */

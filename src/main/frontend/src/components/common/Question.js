@@ -75,10 +75,6 @@ function Question({data, id, userInfo, mode}) {
             </div>
 
             <div className="input-box text">
-<<<<<<< HEAD
-                <div className={data ? "title disable" : "title essential"}>소속</div>
-                <div className="input">
-=======
                 {/*<div className="title">소속</div>*/}
                 {/*<div className="input">*/}
                 {/*    <input*/}
@@ -94,7 +90,6 @@ function Question({data, id, userInfo, mode}) {
                 {/*</div>*/}
                 <div className="input_group">
                     <label htmlFor="belong" className="title">회사명</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <input
                         className="form_control"
                         id="belong"
@@ -110,14 +105,9 @@ function Question({data, id, userInfo, mode}) {
                         <div className="error-msg">{errors.belong?.message}</div>
                     </div>
                 </div>
-<<<<<<< HEAD
 
-                <div className={data ? "title disable" : "title essential"}>성함</div>
-                <div className="input">
-=======
                 <div className="input_group">
                     <label htmlFor="name" className="title">이름</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <input
                         className="form_control"
                         id="name"
@@ -134,16 +124,8 @@ function Question({data, id, userInfo, mode}) {
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            </div>
-
-            <div className="input-box text">
-                <div className={data ? "title disable" : "title essential"}>직책</div>
-                <div className="input">
-=======
                 <div className="input_group">
                     <label htmlFor="position" className="title">직책</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <input
                         className="form_control"
                         id="position"
@@ -160,14 +142,9 @@ function Question({data, id, userInfo, mode}) {
                         <div className="error-msg">{errors.position?.message}</div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div className={data ? "title disable" : "title essential"}>핸드폰</div>
-                <div className="input">
-=======
 
                 <div className="input_group">
                     <label htmlFor="tel" className="title">핸드폰</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <Controller
                         name="tel"
                         control={control}
@@ -192,14 +169,8 @@ function Question({data, id, userInfo, mode}) {
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            <div className="input-box text">
-                <div className={data ? "title disable" : "title essential"}>이메일</div>
-                <div className="input">
-=======
                 <div className="input_group">
                     <label htmlFor="email" className="title">이메일</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <input
                         className="form_control"
                         id="email"
@@ -215,14 +186,9 @@ function Question({data, id, userInfo, mode}) {
                         <div className="error-msg">{errors.email?.message}</div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div className={data ? "title disable" : "title essential"}>제목</div>
-                <div className="input">
-=======
 
                 <div className="input_group">
                     <label htmlFor="title" className="title">제목</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <input
                         className="form_control"
                         id="title"
@@ -239,16 +205,8 @@ function Question({data, id, userInfo, mode}) {
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            </div>
-
-            <div className="input-box contents-box">
-                <div className={data ? "title disable" : "title essential"}>내용</div>
-                <div className="input">
-=======
                 <div className="input_group">
                     <label htmlFor="contents" className="title">내용</label>
->>>>>>> 28e84b565e3d47882e28d913c8fccb6832b92b86
                     <textarea
                         className="form_control"
                         id="contents"
