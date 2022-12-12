@@ -7,7 +7,6 @@ function QuestionFooter(props) {
     return (
         <>
             <div className="agree">
-                <label htmlFor="agree" className="title">개인정보 수집 및 이용에 동의합니다.</label>
                 <input
                     id="agree"
                     type="checkbox"
@@ -17,10 +16,11 @@ function QuestionFooter(props) {
                         required: "개인정보 수집 및 이용에 동의해주세요.",
                     })}
                 />
+                <label htmlFor="agree" className="title">개인정보 수집 및 이용에 동의합니다. (필수)</label>
             </div>
             {errors.agree && <div className="error-box">{errors.agree.message}</div>}
 
-            <div className="btn-group">
+            <div className="btn-group" style={{marginTop: '2em', display: 'flex', justifyContent: 'center'}}>
                 <Button title={mode == 'modal' ? '신청하기' : '문의하기'} backgroundColor="var(--main-bg-color)"/>
             </div>
         </>

@@ -247,13 +247,13 @@ body {
   flex-wrap: wrap;
 }
 .navbar .gnb ul.menu li {
-  margin: 12px 1.5em;
+  /*margin: 12px 1.5em;*/ margin: 1em 2em;
 }
 
 .navbar .gnb ul.menu li a {
   font-size: 1.25em;
   font-weight: 500;
-  padding: 8px 1em;
+  /*padding: 8px 1em;*/ padding-bottom: .75em;
   transition: all 0.1s;
 }
 .navbar .navbar_quick {
@@ -274,9 +274,9 @@ body {
   /*padding: 0.5em 1.25em;*/ padding: .5em 1.5em;
   border-width: 1px;
   border-style: solid;
-  border-color: rgba(35, 34, 34, 0.26);
+  /*border-color: rgba(35, 34, 34, 0.26);*/ border-color: #ddd;
   border-radius: 5em;
-  font-size: 1.0625em;
+  font-size: 1.0625em; font-weight: 400; color: #333;
 }
 .navbar .navbar_quick a {
   display: flex;
@@ -292,7 +292,7 @@ body {
   border-color: #285f74;
 }
 .selected-menu {
-  border-bottom: 2px solid #000000;
+  border-bottom: 3px solid #000000;
 }
 .top-nav li {
   /*border: 1px solid rgba(93, 97, 105, 0.26);*/ border: 1px solid #ddd;
