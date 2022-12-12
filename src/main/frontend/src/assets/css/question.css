@@ -2,51 +2,67 @@
 .form-box {
     display: flex;
     flex-direction: column;
-    width: 60%;
-    min-width: 800px;
+    /*width: 60%;*/
+    /*min-width: 800px;*/
     margin: 0 auto;
+    max-width: 500px;
 }
 .input-box {
-    display: flex;
-    margin: 12px 0;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(93, 97, 105, 0.38);
+    /*display: flex;*/
+    /*margin: 12px 0;*/
+    /*padding: 12px 0;*/
+    /*border-bottom: 1px solid rgba(93, 97, 105, 0.38);*/
+    font-size: 1.125em; color: #333;
 }
 .input-box .title {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-weight: bolder;
-    padding: 0 12px;
+    /*font-weight: bolder;*/
+    /*padding: 0 12px;*/
+    font-weight: 400; margin-bottom: .75em;
 }
+.form_control {padding: .5em .75em; font-family: 'Pretendard'; font-size: 1em; color: #333; }
+.input_group {margin-top: .75em; }
+.input_group label {margin-bottom: 0 !important; }
+.input_group input, .input_group textarea {width: 100%; }
+.input_group textarea {height: 10em; }
+.input_group input[type="tel"] {border: 0; font-size: 1em !important; color: #333; }
+.PhoneInputCountry {margin-right: 1em; }
+
 
 /* 카테고리 선택 */
 .input-box.category {
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    flex-direction: column; margin-bottom: 1em;
 }
 .input-box.category .title {
-    width: 80px;
+    /*width: 80px;*/
 }
 .input-box.category .inner-input {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
+    /*flex-wrap: wrap;*/
+    /*justify-content: center;*/
+    /*justify-items: center;*/
+    /*align-items: center;*/
     width: 100%;
 }
 .input-box.category .inner-input .input {
-    width: 120px;
-    margin: 0 12px;
+    /*width: 120px;*/
+    /*margin: 0 12px;*/
+    display: flex; align-items: center; margin-left: 1.5em;
 }
+.input-box.category .inner-input .input:first-child {margin-left: 0; }
+.input-box.category .inner-input .input input[type="radio"] {width: 1.5em; height: 1.5em; margin-right: .25em; }
+
 .input-box.category .inner-input .input input {
     color: #d30505;
 }
 
 /* 텍스트 입력 */
 .input-box input,textarea {
-    border: 1px solid rgba(93, 97, 105, 0.38);
+    /*border: 1px solid rgba(93, 97, 105, 0.38);*/ border: 1px solid #ddd;
 }
 .input-box input,textarea:focus {
     outline: none;
@@ -63,12 +79,13 @@
 .input-box.text .input input {
     width: 100%;
     padding: 8px;
-    border-radius: 12px;
+    /*border-radius: 12px;*/ border-radius: .25em;
 }
-/* .input-box .title:after {
+.input-box .title:after {
     content: "*";
     color: var(--main-bg-color);
-} */
+    padding-left: .125em;
+}
 
 /* 내용 입력 */
 .input-box.contents-box {
@@ -86,24 +103,28 @@
     height: 200px;
     padding: 12px;
     text-align: start;
-    border-radius: 12px;
+    /*border-radius: 12px;*/ border-radius: .25em;
 }
 
 /* 약간동의 */
 .agree {
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
+    margin-top: 1.5em;
+    font-size: 1.0625em; font-weight: 400;
 }
 .agree input {
-    margin: 0 12px;
+    width: 1.25em; height: 1.25em; margin-right: .5em;
+    /*margin: 0 12px;*/
 }
 
 /* 에러메세지 */
 .error-box {
     width: 100%;
-    font-size: 0.8em;
+    font-size: 0.875em;
     color: red;
-    margin: 12px;
+    text-align: left;
+    /*margin: 12px;*/
 }
 .input-box.text .error-box {
     display: flex;

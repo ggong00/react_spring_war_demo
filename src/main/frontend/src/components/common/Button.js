@@ -4,13 +4,10 @@ function Button(props) {
     const {onClick, title, backgroundColor} = props;
     const style = {
         cursor: "pointer",
-        width: "120px",
-        padding: "6px",
-        margin: "22px 12px",
-        borderRadius: "12px",
-        border: "none",
-        color: "white",
-        fontSize: "16px"
+        minWidth: '50%',
+        border: "none", borderRadius: ".375em",
+        fontSize: '1.125em', fontWeight: '700', color: "white",
+        padding: '.875em 2.5em'
     }
     style.backgroundColor = backgroundColor;
 
