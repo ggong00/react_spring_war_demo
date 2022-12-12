@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "../../assets/css/login.css";
 
-function Login(props) {
+function Login({setSelectedMenu}) {
     const { register, handleSubmit, formState: { isSubmitting, isDirty, errors }} = useForm();
 
     useEffect(() => {
         if (localStorage.getItem("user")) {
             window.location = "/";
         }
+
+        setSelectedMenu("login");
     }, [])
 
     const onSubmit = (formData) => {
+        console.log(formData)
         fetch("/api/login", {
             method : 'post',
             headers: {

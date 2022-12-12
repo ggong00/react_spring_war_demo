@@ -12,14 +12,14 @@ import QuestionPage from "./components/question/QuestionPage";
 
 function App() {
   const [menu, setMenu] = useState([]);
-  const [userInfo, serUserInfo] = useState();
+  const [reloadUserInfo, setReload] = useState(false);
+  const [userInfo, setUserInfo] = useState();
+  const [selectedMenu, setSelectedMenu] = useState();
 
   useEffect(() => {
 
     // 서버세션 확인
-    if (localStorage.getItem("user") && localStorage.getItem("role")) {
-      loginChk();
-    }
+    loginChk();
 
     // 메뉴 설정
     const LoginUser = localStorage.getItem("user");
@@ -48,7 +48,7 @@ function App() {
         {id: "question", name: "문의하기", url: "/question"},
       ]);
     }
-  }, []);
+  }, [reloadUserInfo]);
 
   const loginChk = () => {
     fetch("/api/loginChk", {
@@ -60,26 +60,33 @@ function App() {
         .then((res) => res.json())
         .then((json) => {
           if (!json.data) {
-            alert('세션이 끊겼습니다.')
-            localStorage.removeItem("user");
-            localStorage.removeItem("role");
+            if (localStorage.getItem("user") && localStorage.getItem("role")) {
+              localStorage.removeItem("user");
+              localStorage.removeItem("role");
+              alert('세션이 끊겼습니다.');
+              window.location.reload();
+            }
           } else {
-            serUserInfo(json.data);
+            setUserInfo(json.data);
           }
 
         });
   };
 
+  const reloadUserinfo = () => {
+    setReload(!reloadUserInfo);
+  }
+
   return (
       <div className="App">
-        <Header menu={menu}/>
+        <Header menu={menu} selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu}/>
         <Routes>
           <Route path="/" element={<Navigate to="/solution" replace />} />
           <Route path="/solution" element={<Solution userInfo={userInfo}/>} />
           <Route path="/question" element={<QuestionPage userInfo={userInfo}/>} />
-          <Route path="/my_license" element={<MyLicense userInfo={userInfo}/>} />
+          <Route path="/my_license" element={<MyLicense userInfo={userInfo} reloadUserInfo={reloadUserinfo}/>} />
           <Route path="/admin/management" element={<Management userInfo={userInfo}/>} />
-          <Route path="/login" element={<Login userInfo={userInfo}/>} />
+          <Route path="/login" element={<Login userInfo={userInfo} setSelectedMenu={setSelectedMenu}/>} />
         </Routes>
         {/*<Footer/>*/}
       </div>

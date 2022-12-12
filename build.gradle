@@ -33,63 +33,63 @@ dependencies {
 
 
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
-// war 빌드 설정
-bootJar{
-	archivesBaseName = 'turkey'
-	archiveFileName = 'turkey.jar'
-	archiveVersion = "0.0.1"
-}
-
-apply plugin: 'war'
-bootWar.enabled = false
-war.enabled = true
-
-// 리액트 + 스프링부트 빌드 파일 설정
-def frontendDir = "$projectDir/src/main/frontend"
-
-sourceSets {
-	main {
-		resources { srcDirs = ["$projectDir/src/main/resources"]
-		}
-	}
-}
-
-processResources { dependsOn "copyReactBuildFiles" }
-
-task installReact(type: Exec) {
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "audit", "fix"
-		commandLine 'npm.cmd', 'install'
-		commandLine 'npm.cmd', 'update'
-	}
-	else {
-		commandLine "npm", "audit", "fix"
-		commandLine 'npm', 'install'
-		commandLine 'npm', 'update'
-	}
-}
-
-task buildReact(type: Exec) {
-	dependsOn "installReact"
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		commandLine "npm.cmd", "run-script", "build"
-	} else {
-		commandLine "npm", "run-script", "build"
-	}
-}
-
-task copyReactBuildFiles(type: Copy) {
-	dependsOn "buildReact"
-	from "$frontendDir/build"
-	into "$projectDir/src/main/resources/static"
-}
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
+//
+//// war 빌드 설정
+//bootJar{
+//	archivesBaseName = 'turkey'
+//	archiveFileName = 'turkey.jar'
+//	archiveVersion = "0.0.1"
+//}
+//
+//apply plugin: 'war'
+//bootWar.enabled = false
+//war.enabled = true
+//
+//// 리액트 + 스프링부트 빌드 파일 설정
+//def frontendDir = "$projectDir/src/main/frontend"
+//
+//sourceSets {
+//	main {
+//		resources { srcDirs = ["$projectDir/src/main/resources"]
+//		}
+//	}
+//}
+//
+//processResources { dependsOn "copyReactBuildFiles" }
+//
+//task installReact(type: Exec) {
+//	workingDir "$frontendDir"
+//	inputs.dir "$frontendDir"
+//	group = BasePlugin.BUILD_GROUP
+//	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//		commandLine "npm.cmd", "audit", "fix"
+//		commandLine 'npm.cmd', 'install'
+//		commandLine 'npm.cmd', 'update'
+//	}
+//	else {
+//		commandLine "npm", "audit", "fix"
+//		commandLine 'npm', 'install'
+//		commandLine 'npm', 'update'
+//	}
+//}
+//
+//task buildReact(type: Exec) {
+//	dependsOn "installReact"
+//	workingDir "$frontendDir"
+//	inputs.dir "$frontendDir"
+//	group = BasePlugin.BUILD_GROUP
+//	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//		commandLine "npm.cmd", "run-script", "build"
+//	} else {
+//		commandLine "npm", "run-script", "build"
+//	}
+//}
+//
+//task copyReactBuildFiles(type: Copy) {
+//	dependsOn "buildReact"
+//	from "$frontendDir/build"
+//	into "$projectDir/src/main/resources/static"
+//}
