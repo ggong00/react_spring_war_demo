@@ -111,7 +111,7 @@ function Management(props) {
                             rowData={data}
                             columnDefs={columnDefs}
                             pagination={true}
-                            paginationPageSize={10}
+                            paginationPageSize={25}
                             onCellClicked={cellClickHandler}
                             overlayNoRowsTemplate={
                                 "문의글이 없습니다."

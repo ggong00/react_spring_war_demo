@@ -63,7 +63,7 @@ function App() {
             if (localStorage.getItem("user") && localStorage.getItem("role")) {
               localStorage.removeItem("user");
               localStorage.removeItem("role");
-              alert('세션이 끊겼습니다.');
+              alert('세션이 만료되었습니다.');
               window.location.reload();
             }
           } else {

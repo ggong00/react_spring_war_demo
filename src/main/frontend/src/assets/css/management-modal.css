@@ -4,10 +4,23 @@
 }
 .user-form input {
     padding: 8px;
-    width: 90%;
+    width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(93, 97, 105, 0.38);
     display: inline-block;
+}
+.user-form textarea {
+    border: 1px solid black;
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: 1px solid rgba(93, 97, 105, 0.38);
+    padding: 8px
+}
+.user-form input[type='file'] {
+    border: none;
+    padding-top: 2px;
+    padding-bottom: 0;
 }
 .user-form input:focus {
     outline: none;
@@ -15,7 +28,7 @@
 .user-form .form-header {
     margin: 12px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .user-form .form-header .form-title {
     display: flex;
@@ -40,6 +53,7 @@
     width: 80px;
     margin: 0 12px;
     color: #5d6169;
+    text-align: start;
 }
 .user-form .form-main label.essential:after {
     content: "*";

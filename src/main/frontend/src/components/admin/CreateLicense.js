@@ -6,12 +6,24 @@ function CreateLicense({data, reload}) {
     const { register, handleSubmit, getValues, formState: { isSubmitting, isDirty, errors }} = useForm();
 
     const create = (formData) => {
+
+        //FormData 셋팅
+        const newFormData = new FormData();
+        formData = {...data, ...formData}
+        for(const name in formData) {
+            if(name == 'attachFileList') {
+                [...formData[name]].forEach(file => {
+                    newFormData.append(name, file);
+                })
+            }else {
+                newFormData.append(name, formData[name]);
+            }
+        }
+
+        //라이선스 지급 + 메일 전송
         fetch("/api/admin/license", {
             method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({...data, ...formData})
+            body: newFormData
         })
             .then((res) => res.json())
             .then((json) => {
@@ -95,6 +107,43 @@ function CreateLicense({data, reload}) {
                         />
                     </div>
                 </div>
+
+                <div className="form-header">
+                    <div className="form-title">메일</div>
+                </div>
+                <div className="form-main">
+                    <div className="input">
+                        <label>제목</label>
+                        <input
+                            type="text"
+                            name="mailTitle"
+                            autoComplete="off"
+                            {...register("mailTitle", {
+                            })}
+                        />
+                    </div>
+                    <div className="input">
+                        <label>내용</label>
+                        <textarea
+                            type="text"
+                            name="message"
+                            {...register("message", {
+                            })}
+                        />
+                    </div>
+                    <div className="input file">
+                        <label>첨부파일</label>
+                        <input
+                            type="file"
+                            multiple={true}
+                            name="attachFileList"
+                            autoComplete="off"
+                            {...register("attachFileList", {
+                            })}
+                        />
+                    </div>
+                </div>    
+
                 <div className="button-wrap">
                     <Button
                         title="라이선스 지급"

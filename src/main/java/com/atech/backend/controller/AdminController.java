@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
@@ -62,7 +65,7 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/admin/license")
-    public ResponseEntity createLicense(@RequestBody LicenseDTO.MyLicenseReq myLicenseReq) {
+    public ResponseEntity createLicense(@ModelAttribute LicenseDTO.MyLicenseReq myLicenseReq) throws MessagingException, IOException {
 
         // 유저가 존재하지 않으면 계정을 생성해주라는 메세지 반환
         if (!userService.userDuplChk(myLicenseReq)) {
@@ -72,12 +75,11 @@ public class AdminController {
             );
         }
 
-        // 계정이 존재한다면 라이선스 지급 절차 수행
-        Integer resultCnt = licenseService.createLicense(myLicenseReq);
-        log.info("resultCnt {} ", resultCnt);
+        // 계정이 존재한다면 라이선스 지급 절차 수행 + 응답 메일 전송
+        boolean result = licenseService.createLicense(myLicenseReq);
 
         // insert 실패시 에러 메세지
-        if (resultCnt != 2) {
+        if (!result) {
             return new ResponseEntity(
                     ResponseMsg.create(ResponseCode.FAIL),
                     HttpStatus.OK

@@ -13,6 +13,32 @@ spring:
 
 ---
 
+# 메일 전송 설정
+spring:
+  mail:
+    host: ezsmtp.bizmeka.com
+    port: 25
+    username: dev@atech1221.com
+    password: Dpdlxpzm1221!@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+---
+
+# 파일 전송 설정
+spring:
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
+      enabled: true
+
+---
+
 spring:
   profiles:
     active: prod

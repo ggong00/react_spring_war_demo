@@ -1,11 +1,15 @@
 package com.atech.backend.dto;
 
+import com.atech.backend.mail.MailDto;
 import com.atech.backend.repository.license.MyLicense;
 import com.atech.backend.repository.solution.Solution;
 import com.atech.backend.repository.user.User;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class LicenseDTO {
@@ -41,6 +45,9 @@ public class LicenseDTO {
         private String siteId;
         private String sitePass;
         private String siteUrl;
+        private String mailTitle;
+        private String message;
+        private List<MultipartFile> attachFileList = new ArrayList<>();
 
         public MyLicense toEntity(){
             Solution solution = new Solution();

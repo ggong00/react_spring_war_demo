@@ -8,11 +8,11 @@
     margin: 28px auto;
 }
 .management-contents .status-option {
-    cursor: pointer;
     display: flex;
     margin: 4px;
     font-size: 1em;
 }
 .management-contents .status-option li {
+    cursor: pointer;
     padding: 8px;
 }
