@@ -200,7 +200,7 @@ body {
 
 .container {
   position: relative;
-  max-width: calc(1300px + 2em);
+  max-width: calc(1200px + 2em);
   width: 100%;
   padding-right: 1em;
   padding-left: 1em;
@@ -390,7 +390,7 @@ body {
 
 /* PAGE */
 #route-contents {
-  /*margin: 40px auto;*/ padding: 6em 0; background: #F5F7F9;
+  /*margin: 40px auto;*/ padding: 6em 0; /*background: #F5F7F9;*/
   /*width: 60%;*/
 }
 
