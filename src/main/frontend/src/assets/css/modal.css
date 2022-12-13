@@ -259,27 +259,28 @@ input:read-only, textarea:read-only {
   display: none;
 }
 .modal > section {
-  width: 90%;
+  /*width: 90%;*/ width: 100%;
   margin: 0 auto;
   -webkit-animation: modal-show 0.3s;
           animation: modal-show 0.3s;
   overflow: hidden;
+  /*border-radius: 1em;*/
 }
 .modal > section header {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65em;
+  padding: 0.5em;
   padding-left: 1.25em;
   background-color: #527892; /* border-radius: $r $r 0 0; */
-  color: #fff;
+  font-size: 1.125em; font-weight: 400; color: #fff;
 }
 .modal > section header button {
   display: flex;
   font-size: 1.75em;
   color: #fff;
-  padding: 0.375em;
+  padding: 0.375em; padding-bottom: .25em;
   line-height: 0.5;
   background-color: transparent;
   border: 0;

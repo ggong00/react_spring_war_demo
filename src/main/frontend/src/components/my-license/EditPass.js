@@ -30,28 +30,40 @@ function EditPass({userInfo, close}) {
     return (
     <form className="form-box pass" onSubmit={handleSubmit(onsubmit)}>
         <div className="input-box text">
-            <div className="title">비밀번호</div>
-            <div className="input">
+            {/*<div className="title">비밀번호</div>*/}
+            {/*<div className="input">*/}
+            {/*    <input*/}
+            {/*        id="userPass"*/}
+            {/*        type="text"*/}
+            {/*        name="userPass"*/}
+            {/*        {...register("userPass", {*/}
+            {/*            required: "비밀번호를 입력해주세요.",*/}
+            {/*        })}*/}
+            {/*    />*/}
+            {/*</div>*/}
+
+            <div className="input_group">
+                <label htmlFor="userPass" className="title">비밀번호</label>
                 <input
+                    className="form_control"
                     id="userPass"
-                    type="text"
+                    type="password"
                     name="userPass"
                     {...register("userPass", {
                         required: "비밀번호를 입력해주세요.",
                     })}
                 />
+                <div className="error-box">
+                    <div className="error-msg">{errors.userPass?.message}</div>
+                </div>
             </div>
-            <div className="error-box">
-                <div className="error-msg">{errors.userPass?.message}</div>
-            </div>
-        </div>
 
-        <div className="input-box text">
-            <div className="title">비밀번호 확인</div>
-            <div className="input">
+            <div className="input_group">
+                <label htmlFor="userPass2" className="title">비밀번호 확인</label>
                 <input
+                    className="form_control"
                     id="userPass2"
-                    type="text"
+                    type="password"
                     name="userPass2"
                     {...register("userPass2", {
                         validate: () => {
@@ -63,15 +75,15 @@ function EditPass({userInfo, close}) {
                         },
                     })}
                 />
-            </div>
-            <div className="error-box">
-                <div className="error-msg">{errors.userPass2?.message}</div>
+                <div className="error-box">
+                    <div className="error-msg">{errors.userPass2?.message}</div>
+                </div>
             </div>
         </div>
 
-        <div className="btn-group">
+        <div className="btn-group" style={{marginTop: '2em', display: 'flex', justifyContent: 'space-between'}}>
             <Button title='변경' backgroundColor="var(--main-bg-color)"/>
-            <Button title='취소' backgroundColor="red" onClick={close}/>
+            <Button title='취소' color="#333" onClick={close}/>
         </div>
     </form>
     );

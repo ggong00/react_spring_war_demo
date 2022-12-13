@@ -1,13 +1,18 @@
 .edit-form-menu {
     cursor: pointer;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 12px;
+    display: flex; justify-content: center; align-items: center;
+    /*justify-content: flex-start;*/
+    /*padding: 12px;*/
+    max-width: 500px; margin: 2em auto 1em;
 }
 .edit-form-menu li{
-    padding: 12px;
+    /*padding: 12px;*/ padding: 0 2em; padding-bottom: .5em; font-size: 1.125em; font-weight: 400;
 }
+#route-contents .edit-form-menu li.selected {
+    position: relative; background: #fff !important; border: 0 !important;
+    font-weight: 700; color: var(--main-bg-color) !important;
+}
+.edit-form-menu li.selected:before {display: block; content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: var(--main-bg-color); }
 
 /* 비밀번호 변경 */
 .form-box.pass .input-box{
