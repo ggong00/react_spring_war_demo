@@ -5,16 +5,35 @@ import 'slick-carousel/slick/slick-theme.css';
 import Modal from "../../components/common/Modal";
 import SolutionSlider from "./slider/SolutionSlider";
 
+// 라이선스 정보
+function License(licenseInfo, solution, idx){
+    licenseInfo.map(m => {
+        let obj2 = {};
+        solution[idx].license.map(k => {
+            obj2[k.type] = k[m.id];
+        })
+        m.license = obj2;
+    });
+}
+
 function Solution({userInfo}) {
     const [solution, setSolution] = useState([]);
     const [selectedNav, setSelectedNav] = useState("");
     const [modal, setModal] = useState({});
+
+    const [solutionInfo, setSolutionInfo] = useState({
+        1: `작업지시에서 완성품까지\n생산활동을 추적/최적화`,
+        2: "프로젝트별 관리체계 구축을 통해\n가시성 및 업무 생산성 강화",
+        3: "방사/제직 공정 데이터를\n수집·통합하여 생산관리 효율화"
+    });
+
     const [licenseInfo, setLicenseInfo] = useState([
-        {id: "trial", name: "체험 상품", desc: "서비스를 체험해 보고 싶은 고객"},
-        {id: "basic", name: "Basic", },
-        {id: "premium", name: "Premium", },
-        {id: "custom", name: "맞춤형 상품", }
+        {id: "trial", name: "체험 상품", desc: "서비스를 체험해\n보고 싶은 고객", btn: "체험 신청", license: {}},
+        {id: "basic", name: "Basic", desc: "합리적인 비용으로\n사용하고 싶은 고객", btn: "도입 문의", license: {}},
+        {id: "premium", name: "Premium", desc: "프리미엄 서비스를\n사용하고 싶은 고객", btn: "도입 문의", license: {}},
+        {id: "custom", name: "맞춤형 상품", desc: "기업 맞춤형으로\n사용하고 싶은 고객", btn: "도입 문의", license: {}}
     ]);
+    // const [license, setLicense] = useState();
 
     // 솔루션 정보 조회
     useEffect(() => {
@@ -32,12 +51,17 @@ function Solution({userInfo}) {
                     // 솔루션 정보 저장
                     setSolution(solution);
                     setSelectedNav(solution[0].solutionId);
+
+                    // 라이선스 정보 저장
+                    License(licenseInfo, solution, 0);
                 }
             });
     }, []);
 
     const changeSolution = (e) => {
         setSelectedNav(e.target.id);
+
+        License(licenseInfo, solution, e.target.id - 1);
     }
 
     // 모달
@@ -58,7 +82,7 @@ function Solution({userInfo}) {
     };
 
     return (
-        <div id="route-contents">
+        <div id="route-contents" style={{background: '#F5F7F9'}}>
             <div className="container">
                 <h2>솔루션 소개</h2>
 
@@ -82,6 +106,9 @@ function Solution({userInfo}) {
                     </div>
 
                     <div className="section2">
+                        <h4 className="sec_title">
+                            {solutionInfo[selectedNav]}
+                        </h4>
                         <ul className="solution-detail">
                             {solution
                                 .find(ele => ele.solutionId == selectedNav)
@@ -106,137 +133,39 @@ function Solution({userInfo}) {
 
                 <div className="section-header">구축 비용</div>
                 <div className="section3">
-
-                    {solution
-                        .find(ele => ele.solutionId == selectedNav)
-                        ?.license
-                        .map(ele => {
-                            // return (
-                            //     <tr key={ele.licenseId}>
-                            //         <td>{ele.type}</td>
-                            //         <td>{ele.basic}</td>
-                            //         <td>{ele.premium}</td>
-                            //         <td>{ele.custom}</td>
-                            //     </tr>
-                            // )
-                        })
-                    }
-
                     <ul className="license-info">
-                        {/*{licenseInfo.map(m => {*/}
-                        {/*    console.log(m);*/}
-                        {/*    return (*/}
-                        {/*        <li>*/}
-                        {/*            <div className="card">*/}
-                        {/*                <div className="card_header">*/}
-                        {/*                    <h6>{m.name}</h6>*/}
-                        {/*                    <p>{m.desc}</p>*/}
-                        {/*                </div>*/}
-                        {/*                <div className="card_body">*/}
-                        {/*                    <dl>*/}
-                        {/*                        <dd><span className="cost">　</span></dd>*/}
-                        {/*                        <dd><span className="cost">0$</span> / 15일</dd>*/}
-                        {/*                    </dl>*/}
-                        {/*                    <div className="question-wrap">*/}
-                        {/*                        <button*/}
-                        {/*                            className="btn-question"*/}
-                        {/*                            onClick={openModal}*/}
-                        {/*                        >15일 무료체험 신청하기</button>*/}
-                        {/*                    </div>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*        </li>*/}
-                        {/*    )*/}
-                        {/*})}*/}
-
-                        <li>
-                            <div className="card">
-                                <div className="card_header">
-                                    <h6>체험 상품</h6>
-                                    <p>서비스를 체험해<br />보고 싶은 고객</p>
-                                </div>
-                                <div className="card_body">
-                                    <dl>
-                                        <dd><span className="cost">　</span></dd>
-                                        <dd><span className="cost">0$</span> / 15일</dd>
-                                    </dl>
-                                    <div className="question-wrap">
-                                        <button
-                                            className="btn-question"
-                                            onClick={openModal}
-                                        >15일 무료체험 신청하기</button>
+                        {licenseInfo.map((m) => {
+                            return (
+                                <li key={m.id}>
+                                    <div className="card">
+                                        <div className="card_header">
+                                            <h6>{m.name}</h6>
+                                            <p>{m.desc}</p>
+                                        </div>
+                                        <div className="card_body">
+                                            <dl>
+                                                <dd>
+                                                    <span className="cost">{m.license['연간 구독형'] == undefined ? '　' : m.license['연간 구독형']}</span>
+                                                    {m.license['연간 구독형'] == undefined ? '' : ' / 연간 구독형'}
+                                                </dd>
+                                                <dd>
+                                                    <span className="cost">{m.license['영구 라이선스'] == undefined ? '0$' : m.license['영구 라이선스']}</span>
+                                                    {m.license['연간 구독형'] == undefined ? ' / 15일' : ' / 영구 라이선스'}
+                                                </dd>
+                                            </dl>
+                                            <div className="question-wrap">
+                                                <button
+                                                    className="btn-question"
+                                                    onClick={openModal}
+                                                >{m.btn}</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="card">
-                                <div className="card_header">
-                                    <h6>Basic</h6>
-                                    <p>합리적인 비용으로<br />사용하고 싶은 고객</p>
-                                </div>
-                                <div className="card_body">
-                                    <dl>
-                                        <dd><span className="cost">11$</span><span> / 연간 구독형</span></dd>
-                                        <dd><span className="cost">110$</span><span> / 영구 라이선스</span></dd>
-                                    </dl>
-
-                                    <div className="question-wrap">
-                                        <button
-                                            className="btn-question"
-                                            onClick={openModal}
-                                            style={{background:'#4c7edc', border: '1px solid #4c7edc', color: '#fff'}}
-                                        >도입 문의</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="card">
-                                <div className="card_header">
-                                    <h6>Premium</h6>
-                                    <p>합리적인 비용으로<br />사용하고 싶은 고객</p>
-                                </div>
-                                <div className="card_body">
-                                    <dl>
-                                        <dd><span className="cost">15$</span><span> / 연간 구독형</span></dd>
-                                        <dd><span className="cost">150$</span><span> / 영구 라이선스</span></dd>
-                                    </dl>
-
-                                    <div className="question-wrap">
-                                        <button
-                                            className="btn-question"
-                                            onClick={openModal}
-                                            style={{background:'#4c7edc', border: '1px solid #4c7edc', color: '#fff'}}
-                                        >도입 문의</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="card">
-                                <div className="card_header">
-                                    <h6>맞춤형 상품</h6>
-                                    <p>합리적인 비용으로<br />사용하고 싶은 고객</p>
-                                </div>
-                                <div className="card_body">
-                                    <dl>
-                                        <dd><span className="cost">　</span><span></span></dd>
-                                        <dd><span className="cost">별도문의</span><span> / 영구 라이선스</span></dd>
-                                    </dl>
-
-                                    <div className="question-wrap">
-                                        <button
-                                            className="btn-question"
-                                            onClick={openModal}
-                                        >도입 문의</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                                </li>
+                            )
+                        })}
                     </ul>
-
-
+                    
                     {/*<table className="license-info-table">*/}
                         {/*<thead>*/}
                         {/*    <tr>*/}
@@ -247,20 +176,20 @@ function Solution({userInfo}) {
                         {/*    </tr>*/}
                         {/*</thead>*/}
                         {/*<tbody>*/}
-                        {solution
-                            .find(ele => ele.solutionId == selectedNav)
-                            ?.license
-                            .map(ele => {
-                                // return (
-                                //     <tr key={ele.licenseId}>
-                                //         <td>{ele.type}</td>
-                                //         <td>{ele.basic}</td>
-                                //         <td>{ele.premium}</td>
-                                //         <td>{ele.custom}</td>
-                                //     </tr>
-                                // )
-                            })
-                        }
+                        {/*{solution*/}
+                        {/*    .find(ele => ele.solutionId == selectedNav)*/}
+                        {/*    ?.license*/}
+                        {/*    .map(ele => {*/}
+                        {/*        return (*/}
+                        {/*            <tr key={ele.licenseId}>*/}
+                        {/*                <td>{ele.type}</td>*/}
+                        {/*                <td>{ele.basic}</td>*/}
+                        {/*                <td>{ele.premium}</td>*/}
+                        {/*                <td>{ele.custom}</td>*/}
+                        {/*            </tr>*/}
+                        {/*        )*/}
+                        {/*    })*/}
+                        {/*}*/}
                         {/*</tbody>*/}
                     {/*</table>*/}
                 </div>
