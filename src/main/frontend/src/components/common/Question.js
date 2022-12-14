@@ -12,12 +12,6 @@ function Question({data, id, userInfo, type}) {
     });
 
     useEffect(() => {
-        // 로그인 체크
-        // const role = localStorage.getItem("role");
-        // if (type == 'license' && !role) {
-        //     alert('로그인이 필요합니다.');
-        //     window.location = "/login";
-        // }
   
         // 솔루션 정보 조회
         fetch(`/api/solution`, {
@@ -104,104 +98,111 @@ function Question({data, id, userInfo, type}) {
                 {/*        })}*/}
                 {/*    />*/}
                 {/*</div>*/}
-                <div className="input_group">
-                    <label htmlFor="belong" className="title">회사명</label>
-                    <input
-                        className="form_control"
-                        id="belong"
-                        type="text"
-                        name="belong"
-                        disabled={data && true}
-                        defaultValue={data ? data.belong : userInfo?.belong}
-                        {...register("belong", {
-                            required: "회사명을 입력해주세요.",
-                        })}
-                    />
-                    <div className="error-box">
-                        <div className="error-msg">{errors.belong?.message}</div>
-                    </div>
-                </div>
 
-                <div className="input_group">
-                    <label htmlFor="name" className="title">이름</label>
-                    <input
-                        className="form_control"
-                        id="name"
-                        type="text"
-                        name="name"
-                        disabled={data && true}
-                        defaultValue={data ? data.name : userInfo?.name}
-                        {...register("name", {
-                            required: "이름을 입력해주세요.",
-                        })}
-                    />
-                    <div className="error-box">
-                        <div className="error-msg">{errors.name?.message}</div>
-                    </div>
-                </div>
-
-                <div className="input_group">
-                    <label htmlFor="position" className="title">직책</label>
-                    <input
-                        className="form_control"
-                        id="position"
-                        type="text"
-                        name="position"
-                        disabled={data && true}
-                        defaultValue={data ? data.position : userInfo?.position}
-                        {...register("position", {
-                            required: "칙책을 입력해주세요.",
-
-                        })}
-                    />
-                    <div className="error-box">
-                        <div className="error-msg">{errors.position?.message}</div>
-                    </div>
-                </div>
-
-                <div className="input_group">
-                    <label htmlFor="tel" className="title">핸드폰</label>
-                    <Controller
-                        name="tel"
-                        control={control}
-                        rules={{ required: "전화번호를 입력해주세요." }}
-                        render={({ field: { onChange, value } }) => (
-                            <PhoneInput
+                {
+                    type == 'question' || type == 'management' ? 
+                    <>
+                        <div className="input_group">
+                            <label htmlFor="belong" className="title">회사명</label>
+                            <input
                                 className="form_control"
-                                id="tel"
-                                type="tel"
-                                name="tel"
-                                international
-                                initialValueFormat="national"
-                                onChange={onChange}
+                                id="belong"
+                                type="text"
+                                name="belong"
                                 disabled={data && true}
-                                value={data ? data.tel : userInfo?.tel}
-                                defaultCountry="TR"
+                                defaultValue={data ? data.belong : userInfo?.belong}
+                                {...register("belong", {
+                                    required: "회사명을 입력해주세요.",
+                                })}
                             />
-                        )}
-                    />
-                    <div className="error-box">
-                        <div className="error-msg">{errors.tel?.message}</div>
-                    </div>
-                </div>
+                            <div className="error-box">
+                                <div className="error-msg">{errors.belong?.message}</div>
+                            </div>
+                        </div>
 
-                <div className="input_group">
-                    <label htmlFor="email" className="title">이메일</label>
-                    <input
-                        className="form_control"
-                        id="email"
-                        type="email"
-                        name="email"
-                        disabled={data && true}
-                        defaultValue={data ? data.email : userInfo?.email}
-                        {...register("email", {
-                            required: "이메일을 입력해주세요.",
-                        })}
-                    />
-                    <div className="error-box">
-                        <div className="error-msg">{errors.email?.message}</div>
-                    </div>
-                </div>
+                        <div className="input_group">
+                            <label htmlFor="name" className="title">이름</label>
+                            <input
+                                className="form_control"
+                                id="name"
+                                type="text"
+                                name="name"
+                                disabled={data && true}
+                                defaultValue={data ? data.name : userInfo?.name}
+                                {...register("name", {
+                                    required: "이름을 입력해주세요.",
+                                })}
+                            />
+                            <div className="error-box">
+                                <div className="error-msg">{errors.name?.message}</div>
+                            </div>
+                        </div>
+
+                        <div className="input_group">
+                            <label htmlFor="position" className="title">직책</label>
+                            <input
+                                className="form_control"
+                                id="position"
+                                type="text"
+                                name="position"
+                                disabled={data && true}
+                                defaultValue={data ? data.position : userInfo?.position}
+                                {...register("position", {
+                                    required: "칙책을 입력해주세요.",
+
+                                })}
+                            />
+                            <div className="error-box">
+                                <div className="error-msg">{errors.position?.message}</div>
+                            </div>
+                        </div>
+
+                        <div className="input_group">
+                            <label htmlFor="tel" className="title">핸드폰</label>
+                            <Controller
+                                name="tel"
+                                control={control}
+                                rules={{ required: "전화번호를 입력해주세요." }}
+                                render={({ field: { onChange, value } }) => (
+                                    <PhoneInput
+                                        className="form_control"
+                                        id="tel"
+                                        type="tel"
+                                        name="tel"
+                                        international
+                                        initialValueFormat="national"
+                                        onChange={onChange}
+                                        disabled={data && true}
+                                        value={data ? data.tel : userInfo?.tel}
+                                        defaultCountry="TR"
+                                    />
+                                )}
+                            />
+                            <div className="error-box">
+                                <div className="error-msg">{errors.tel?.message}</div>
+                            </div>
+                        </div>
+
+                        <div className="input_group">
+                            <label htmlFor="email" className="title">이메일</label>
+                            <input
+                                className="form_control"
+                                id="email"
+                                type="email"
+                                name="email"
+                                disabled={data && true}
+                                defaultValue={data ? data.email : userInfo?.email}
+                                {...register("email", {
+                                    required: "이메일을 입력해주세요.",
+                                })}
+                            />
+                            <div className="error-box">
+                                <div className="error-msg">{errors.email?.message}</div>
+                            </div>
+                        </div>
+                    </> 
+                    : null
+                }
 
                 <div className="input_group">
                     <label htmlFor="title" className="title">제목</label>

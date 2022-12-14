@@ -39,7 +39,7 @@ function ManagementModal({data, reload, type}) {
 
     return (
         <>
-            <Question data={data}/>
+            <Question data={data} type="management"/>
             {data.resYn == '신규' && !isUserDupl && <CreateUser data={data} reset={reset}/>}
             {data.resYn == '신규' && type == 'license' && <CreateLicense data={data} reload={reload}/>}
             {data.resYn == '신규' && type == 'question' && <SendMail data={data} reload={reload}/>}
