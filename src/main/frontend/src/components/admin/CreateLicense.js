@@ -40,6 +40,8 @@ function CreateLicense({data, reload}) {
                     reload();
                 } else if (json.code == "05-2") {
                     alert("사이트 계정을 먼저 생성해주세요");
+                } else if (json.code == "08") {
+                    alert("메일주소를 찾을 수 없습니다.");
                 }
             })
             .catch(error => {

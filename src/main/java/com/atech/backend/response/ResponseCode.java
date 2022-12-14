@@ -18,6 +18,7 @@ public enum ResponseCode {
     USER_MISS("05-2","라이선스를 지급하려면 사이트 계정이 필요합니다."),
     ID_DUPL("06","ID가 중복됩니다."),
     LOGOUT_SUCCESS("07","로그아웃에 성공했습니다."),
+    MAIL_TO_NOTFOUND("08", "메일주소를 찾을 수 없습니다."),
     SERVER_ERROR("99","서버에 문제가 생겼습니다.");
 
     private String code;

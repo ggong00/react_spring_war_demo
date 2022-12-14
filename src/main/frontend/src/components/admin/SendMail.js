@@ -35,6 +35,8 @@ function SendMail({data, reload}) {
                 if (json.code == "00") {
                     alert("성공적으로 전송했습니다.");
                     reload();
+                } else if (json.code == "08") {
+                    alert("메일주소를 찾을 수 없습니다.");
                 }
             })
             .catch(error => {
