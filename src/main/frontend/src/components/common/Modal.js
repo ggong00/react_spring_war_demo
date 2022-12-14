@@ -11,7 +11,7 @@ function Modal(props) {
     return (
         <div className={open ? "openModal modal" : "modal"}>
             {open ? (
-                <section className="modal-lg">
+                <section className={header === '내 정보 수정' ? "modal-md" : "modal-lg"}>
                     <header>
                         {header}
                         <button className="close" onClick={close}>
