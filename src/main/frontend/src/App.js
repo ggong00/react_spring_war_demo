@@ -5,6 +5,7 @@ import "./assets/css/font.css";
 import "./assets/css/common.css";
 import Header from "./components/common/Header";
 import Login from "./components/login/Login";
+import Join from "./components/join/Join";
 import Solution from "./components/solution/Solution";
 import MyLicense from "./components/my-license/MyLicense";
 import Management from "./components/admin/management/Management";
@@ -89,7 +90,8 @@ function App() {
           <Route path="/my_license" element={<MyLicense userInfo={userInfo} reloadUserInfo={reloadUserinfo}/>} />
           <Route path="/admin/management/question" element={<Management userInfo={userInfo} type="question"/>} />
           <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="license"/>} />
-          <Route path="/login" element={<Login userInfo={userInfo} setSelectedMenu={setSelectedMenu}/>} />
+          <Route path="/login" element={<Login setSelectedMenu={setSelectedMenu}/>} />
+          <Route path="/join" element={<Join setSelectedMenu={setSelectedMenu}/>} />
         </Routes>
         <Footer/>
       </div>

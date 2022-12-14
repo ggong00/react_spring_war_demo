@@ -10,11 +10,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.IOException;
+import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
@@ -22,6 +22,8 @@ public class MailService {
 
     final private JavaMailSender javaMailSender;
     private static final String FROM_ADDRESS = "dev@atech1221.com";
+
+    private String authCode;
 
     public void sendMail(MailDto mailDto) throws MessagingException, IOException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -66,6 +68,54 @@ public class MailService {
         html.append("   </div> ");
 
         return html.toString();
+    }
+
+    public String createMailAuthHTML() {
+        StringBuffer html = new StringBuffer();
+
+        html.append("<div align='center' style='border:1px solid black; font-family:verdana';>");
+        html.append("<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>");
+        html.append("<div style='font-size:130%'>");
+        html.append("CODE : <strong>");
+        html.append(authCode + "</strong><div><br/> ");
+
+        return html.toString();
+    }
+
+    public void createKey() {
+        StringBuffer key = new StringBuffer();
+        Random rnd = new Random();
+
+        for (int i = 0; i < 8; i++) { // 인증코드 8자리
+            int index = rnd.nextInt(3); // 0~2 까지 랜덤
+
+            switch (index) {
+                case 0:
+                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
+                    //  a~z  (ex. 1+97=98 => (char)98 = 'b')
+                    break;
+                case 1:
+                    key.append((char) ((int) (rnd.nextInt(26)) + 65));
+                    //  A~Z
+                    break;
+                case 2:
+                    key.append((rnd.nextInt(10)));
+                    // 0~9
+                    break;
+            }
+        }
+
+        this.authCode = key.toString();
+    }
+
+    public boolean check(String code) {
+        if(authCode != null && code.equals(authCode)) {
+            this.authCode = null;
+
+            return true;
+        }
+
+        return false;
     }
 
 }

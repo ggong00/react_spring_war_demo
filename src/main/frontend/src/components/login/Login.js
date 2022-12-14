@@ -14,7 +14,6 @@ function Login({setSelectedMenu}) {
     }, [])
 
     const onSubmit = (formData) => {
-        console.log(formData)
         fetch("/api/login", {
             method : 'post',
             headers: {

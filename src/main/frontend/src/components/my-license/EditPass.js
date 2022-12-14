@@ -20,7 +20,7 @@ function EditPass({userInfo, close}) {
             .then((json) => {
                 if (json.code == "00") {
                     alert('정보가 성공적으로 수정되었습니다.');
-                    close();
+                    // close();
                 }
             }
             )
@@ -68,6 +68,9 @@ function EditPass({userInfo, close}) {
                     {...register("userPass2", {
                         validate: () => {
                             if(getValues('userPass') == getValues('userPass2')) {
+                                console.log(getValues('userPass'))
+                                console.log(getValues('userPass2'))
+
                                 return true;
                             } else {
                                 return '비밀번호가 일치하지 않습니다.'

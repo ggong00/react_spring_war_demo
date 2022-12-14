@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -98,6 +99,45 @@ public class UserController {
 
         return new ResponseEntity(
                 ResponseMsg.create(ResponseCode.SUCCESS, true),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/api/join")
+    public ResponseEntity insert(@RequestBody UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        // 계정 생성
+        userService.join(userReq);
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/api/send-code")
+    public ResponseEntity sendCode(@RequestParam("to") String to) throws MessagingException, IOException {
+        userService.sendCodeMail(to);
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/api/code-check")
+    public ResponseEntity codeCheck(@RequestParam("code") String code) throws MessagingException, IOException {
+        boolean result = userService.codeCheck(code);
+
+        if(!result) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.FAIL),
+                    HttpStatus.OK
+            );
+        }
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
                 HttpStatus.OK
         );
     }

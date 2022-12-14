@@ -35,9 +35,12 @@ public class SecurityConfig {
                 .authorizeRequests(authorize -> authorize
                         .antMatchers(JsonUsernamePasswordAuthenticationFilter.SPRING_SECURITY_LOGIN_URL,
                                 "/api/logout",
+                                "/api/join",
                                 "/api/solution",
                                 "/api/question",
-                                "/api/loginChk"
+                                "/api/loginChk",
+                                "/api/send-code",
+                                "/api/code-check"
                         ).permitAll()
                 )
                 .formLogin().disable()

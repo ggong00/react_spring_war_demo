@@ -11,7 +11,6 @@ function CreateLicense({data, reload}) {
     }
 
     const create = (formData) => {
-        console.log(data)
 
         //FormData 셋팅
         if(!formData.mailTitle) formData.mailTitle = defaultMailMsg.title; 
