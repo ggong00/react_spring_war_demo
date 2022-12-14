@@ -73,9 +73,6 @@
 .input-box.text {
     flex-wrap: wrap;
 }
-.input-box.text .title {
-    width: 80px;
-}
 .input-box.text .input {
     flex: 8;
 }

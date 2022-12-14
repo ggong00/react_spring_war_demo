@@ -165,7 +165,7 @@ public class AdminController {
     @PostMapping("/api/admin/create-user")
     public ResponseEntity insert(@RequestBody UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        // 유저가 이미 존재하는지 체크
+        // 이메일 중복 체크
         if (userService.userDuplChk(userReq)) {
             return new ResponseEntity(
                     ResponseMsg.create(ResponseCode.USER_DUPL),
@@ -173,7 +173,7 @@ public class AdminController {
             );
         }
 
-        // 생성하려면 Id가 중복되는지 체크
+        // 아이디 중복 체크
         if (userService.idDuplChk(userReq)) {
             return new ResponseEntity(
                     ResponseMsg.create(ResponseCode.ID_DUPL),

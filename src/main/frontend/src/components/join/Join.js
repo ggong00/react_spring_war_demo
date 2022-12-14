@@ -6,10 +6,11 @@ import '../../assets/css/join.css'
 import PhoneInput from 'react-phone-number-input'
 
 function Join({setSelectedMenu}) {
-    const { register, handleSubmit, reset, control, watch, formState: { isSubmitting, isDirty, errors }} = useForm();
-    const { mailSuccess, setMailSuccess} = useState(false);
+    const { register, handleSubmit, reset, control, watch, getValues, formState: { isSubmitting, isDirty, errors }} = useForm();
+    const [ mailSuccess, setMailSuccess] = useState();
+    const [ idSuccess, setIdSuccess] = useState();
 
-    const sucsess = () => {
+    const success = () => {
         setMailSuccess(true);
     }
 
@@ -18,12 +19,13 @@ function Join({setSelectedMenu}) {
     }
 
     useEffect(() => {
+        console.log('test')
         if (localStorage.getItem("user")) {
             window.location = "/";
         }
 
         setSelectedMenu("join");
-    }, [])
+    }, [idSuccess, mailSuccess])
 
     const onSubmit = (formData) => {
         console.log(formData)
@@ -46,10 +48,37 @@ function Join({setSelectedMenu}) {
     }
 
     const errorHandle = (error) => {
-        if(error.email.type != 'required' && error.email.message) {
+        if(error.email && error.email.type != 'required') {
             alert(error.email.message)
             return;
         }
+
+        if(error.userId && error.userId.type != 'required') {
+            alert(error.userId.message)
+            return;
+        }
+    }
+
+    const idDuplChk = () => {
+        fetch("/api/user/dupl-check", {
+            method : 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(watch("userId"))
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                if (json.code == "00") {
+                    setIdSuccess(true);
+                    alert('사용 가능한 아이디입니다..')
+                } else if (json.code == "06") {
+                    setIdSuccess(false);
+                    alert('이미 사용중인 아이디입니다.')
+                }
+            }
+            )
+            .catch(error => {console.log(error)});
     }
 
     return (
@@ -59,19 +88,42 @@ function Join({setSelectedMenu}) {
             <form className="form-box" onSubmit={handleSubmit(onSubmit,errorHandle)}>
                 <div className="input-box text">
                     <div className="input_group">
-                        <label htmlFor="userId" className="title">아이디</label>
+                        <div className="id-header">
+                            <label htmlFor="userId" className="title">아이디</label>
+                            <button 
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: idSuccess ? '#54B435' : 'rgb(131 142 128 / 54%)',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    padding: '8px',
+                                    margin: '0 6px',
+                                    color: 'white'
+                                }}  
+                                type="button"
+                                onClick={idDuplChk}
+                            >중복 확인</button>
+                        </div>
                         <input
                             className="form_control"
                             id="userId"
                             type="text"
                             name="userId"
-                            autoComplete="off"
+                            autoComplete="new-password"
                             {...register("userId", {
                                 required: "아이디는 필수 입력입니다.",
+                                validate: () => {
+                                    if(idSuccess) {
+                                        return true;
+                                    } else {
+                                        return '아이디 중복체크를 진행해주세요.'
+                                    }
+                                },
+                                onChange: () => setIdSuccess(false)
                             })}
                         />
                         <div className="error-box">
-                            <div className="error-msg">{errors.userId?.message}</div>
+                            <div className="error-msg">{errors.userId?.type == 'required' && errors.userId?.message}</div>
                         </div>
                     </div>
 
@@ -80,15 +132,38 @@ function Join({setSelectedMenu}) {
                         <input
                             id="userPass"
                             className="form_control"
-                            type="text"
+                            type="password"
                             name="userPass"
-                            autoComplete="off"
+                            autoComplete="new-password"
                             {...register("userPass", {
                                 required: "비밀번호는 필수 입력입니다.",
                             })}
                         />
                         <div className="error-box">
                             <div className="error-msg">{errors.userPass?.message}</div>
+                        </div>
+                    </div>
+
+                    <div className="input_group">
+                        <label htmlFor="userPass2" className="title">비밀번호 확인</label>
+                        <input
+                            className="form_control"
+                            id="userPass2"
+                            type="password"
+                            name="userPass2"
+                            autoComplete="new-password"
+                            {...register("userPass2", {
+                                validate: () => {
+                                    if(getValues('userPass') == getValues('userPass2')) {
+                                        return true;
+                                    } else {
+                                        return '비밀번호가 일치하지 않습니다.'
+                                    }
+                                },
+                            })}
+                        />
+                        <div className="error-box">
+                            <div className="error-msg">{errors.userPass2?.message}</div>
                         </div>
                     </div>
 
@@ -181,13 +256,14 @@ function Join({setSelectedMenu}) {
                                         return '메일을 인증해주세요.'
                                     }
                                 },
+                                onChange: () => setMailSuccess(false)
                             })}
                         />
                         <div className="error-box">
                             <div className="error-msg">{errors.email?.type == 'required' && errors.email?.message}</div>
                         </div>
                     </div>
-                    <AuthMail sucsess={sucsess} fail={fail} to={watch("email")}/>
+                    <AuthMail success={success} fail={fail} to={watch("email")} state={mailSuccess}/>
         
                     <div className="btn-submit">
                         <button className="btn" type="submit">회원가입</button>

@@ -36,6 +36,7 @@ public class UserDTO {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder

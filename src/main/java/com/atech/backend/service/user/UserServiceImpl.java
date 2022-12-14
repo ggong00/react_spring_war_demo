@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService{
         String html = mailService.createMailAuthHTML();
         MailDto mailDto = new MailDto();
         mailDto.setMailTitle("인증코드입니다.");
-        mailDto.setMessage("아래 인증코드를 입력해주세요");
+        mailDto.setEmail(to);
         mailDto.setMessage(html);
         mailService.sendMail(mailDto);
     }

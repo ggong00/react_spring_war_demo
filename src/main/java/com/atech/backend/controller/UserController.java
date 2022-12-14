@@ -105,6 +105,21 @@ public class UserController {
 
     @PostMapping("/api/join")
     public ResponseEntity insert(@RequestBody UserDTO.UserReq userReq) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        // 이메일 중복 체크
+        if (userService.userDuplChk(userReq)) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.USER_DUPL),
+                    HttpStatus.OK
+            );
+        }
+
+        // 아이디 중복 체크
+        if (userService.idDuplChk(userReq)) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.ID_DUPL),
+                    HttpStatus.OK
+            );
+        }
 
         // 계정 생성
         userService.join(userReq);
@@ -116,8 +131,21 @@ public class UserController {
     }
 
     @PostMapping("/api/send-code")
-    public ResponseEntity sendCode(@RequestParam("to") String to) throws MessagingException, IOException {
+    public ResponseEntity sendCode(@RequestBody String to) throws MessagingException, IOException {
+        to = to.replaceAll("\"", "");
+        UserDTO.UserReq userReq = new UserDTO.UserReq();
+        userReq.setEmail(to);
+
+        // 이메일 중복 체크
+        if (userService.userDuplChk(userReq)) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.USER_DUPL),
+                    HttpStatus.OK
+            );
+        }
+
         userService.sendCodeMail(to);
+        log.info("to {}", to);
 
         return new ResponseEntity(
                 ResponseMsg.create(ResponseCode.SUCCESS),
@@ -126,12 +154,34 @@ public class UserController {
     }
 
     @PostMapping("/api/code-check")
-    public ResponseEntity codeCheck(@RequestParam("code") String code) throws MessagingException, IOException {
+    public ResponseEntity codeCheck(@RequestBody String code) throws MessagingException, IOException {
+        code = code.replaceAll("\"", "");
         boolean result = userService.codeCheck(code);
+        log.info("code {}", code);
 
         if(!result) {
             return new ResponseEntity(
                     ResponseMsg.create(ResponseCode.FAIL),
+                    HttpStatus.OK
+            );
+        }
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/api/user/dupl-check")
+    public ResponseEntity duplCheck(@RequestBody String userId) throws MessagingException, IOException {
+        userId = userId.replaceAll("\"", "");
+        UserDTO.UserReq userReq = new UserDTO.UserReq();
+        userReq.setUserId(userId);
+
+        // 아이디 중복체크
+        if (userService.idDuplChk(userReq)) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.ID_DUPL),
                     HttpStatus.OK
             );
         }
@@ -147,6 +197,7 @@ public class UserController {
         UserDetails details = userService.findByUserId(username);
         UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(details, details.getPassword(), details.getAuthorities());
         newAuth.setDetails(authentication.getDetails());
+
         return newAuth;
     }
 }

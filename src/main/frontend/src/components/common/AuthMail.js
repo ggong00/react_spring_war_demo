@@ -1,7 +1,7 @@
 import { ColDefUtil } from "ag-grid-community";
 import React, {useEffect, useState} from "react";
 
-function AuthMail({to,success,fail}) {
+function AuthMail({to,success,fail,state}) {
     const [codeValue, setCodeValue] = useState();
 
     const changeHandle = ({target}) => {
@@ -9,41 +9,60 @@ function AuthMail({to,success,fail}) {
     }
 
     const sendAuthMail = () => {
-        // fetch(`/api/send-code`, {
-        //     method: 'delete',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // })
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         console.log(json)
-        //         if (json.code == "00") {
+        if(state) return;
 
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
+        if(!to) {
+            alert('메일을 입력해주세요.');
+            return;
+        }
+
+        fetch(`/api/send-code`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(to)
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                if (json.code == "00") {
+                    alert('인증코드를 메일로 전송했습니다.');
+                } else if (json.code == "05") {
+                    alert('이미 가입한 이메일입니다.');
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
     const onAuth = () => {
-        // fetch(`/api/code-check`, {
-        //     method: 'delete',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // })
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         console.log(json)
-        //         if (json.code == "00") {
+        if(state) return;
 
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
+        if(!codeValue) {
+            alert('인증코드를 입력해주세요.');
+            return;
+        }
+
+        fetch(`/api/code-check`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(codeValue)
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                if (json.code == "00") {
+                    success();
+                } else if (json.code == "-1") {
+                    alert('인증코드가 올바르지 않습니다.');
+                    fail();
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
 
     return (
@@ -67,6 +86,7 @@ function AuthMail({to,success,fail}) {
                 />
                 <button
                     style={{
+                        cursor: 'pointer',
                         flex: '1',
                         backgroundColor: 'rgb(240 125 125)',
                         border: 'none',
@@ -82,8 +102,9 @@ function AuthMail({to,success,fail}) {
                 </button>
                 <button
                     style={{
+                        cursor: 'pointer',
                         flex: '1',
-                        backgroundColor: 'rgb(131 142 128 / 54%)',
+                        backgroundColor: state ? '#54B435' : 'rgb(131 142 128 / 54%)',
                         border: 'none',
                         borderRadius: '4px',
                         padding: '8px',

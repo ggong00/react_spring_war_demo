@@ -32,10 +32,10 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}
-//
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
 //// war 빌드 설정
 //bootJar{
 //	archivesBaseName = 'turkey'

@@ -1,7 +1,7 @@
 package com.atech.backend.mail;
 
 import com.atech.backend.dto.LicenseDTO;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,13 +17,17 @@ import java.io.IOException;
 import java.util.Random;
 
 @Component
-@RequiredArgsConstructor
+@Slf4j
 public class MailService {
 
     final private JavaMailSender javaMailSender;
     private static final String FROM_ADDRESS = "dev@atech1221.com";
-
     private String authCode;
+
+    public MailService(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+        createKey();
+    }
 
     public void sendMail(MailDto mailDto) throws MessagingException, IOException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -109,8 +113,10 @@ public class MailService {
     }
 
     public boolean check(String code) {
-        if(authCode != null && code.equals(authCode)) {
-            this.authCode = null;
+        log.info("인증코드 {}", authCode);
+        log.info("입력받은 코드 {}",code);
+        if(code.equals(authCode)) {
+            createKey();
 
             return true;
         }

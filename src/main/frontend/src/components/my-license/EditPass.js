@@ -68,9 +68,6 @@ function EditPass({userInfo, close}) {
                     {...register("userPass2", {
                         validate: () => {
                             if(getValues('userPass') == getValues('userPass2')) {
-                                console.log(getValues('userPass'))
-                                console.log(getValues('userPass2'))
-
                                 return true;
                             } else {
                                 return '비밀번호가 일치하지 않습니다.'

@@ -40,7 +40,8 @@ public class SecurityConfig {
                                 "/api/question",
                                 "/api/loginChk",
                                 "/api/send-code",
-                                "/api/code-check"
+                                "/api/code-check",
+                                "/api/user/dupl-check"
                         ).permitAll()
                 )
                 .formLogin().disable()

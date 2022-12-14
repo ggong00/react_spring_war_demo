@@ -15,7 +15,7 @@
 /*    width: 50%;*/
 /*}*/
 .join_wrap {width: 500px; margin: 0 auto; margin-top: 8.5em; margin-bottom: 8.5em; padding: 3em 2em; border: 1px solid #ddd; box-shadow: 10px 10px 10px rgb(225 231 255 / 25%); border-radius: 1.25em; }
-.join_wrap .title { font-size: 2em;}
+.join_wrap .title { font-size: 2em; width: auto;}
 .join_wrap .logo img {width: 25%; }
 .join_wrap .form_control {width: 100%; font-size: 1.125em; }
 .join_wrap .btn {font-size: 1.125em; }
@@ -24,6 +24,7 @@
 .join_wrap .input_group label {font-size: 1.125em; font-weight: 400; color: #333; }
 .join_wrap .btn-submit {margin-top: 1.5em; }
 .join_wrap .btn-submit button {width: 100%; background: var(--main-bg-color); color: #fff; font-weight: 700; }
+.join_wrap .id-header {display: flex; margin: 8px 0;}
 
 .section1 .join-input {
     width: 70%;
