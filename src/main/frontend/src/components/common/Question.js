@@ -5,15 +5,22 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import QuestionFooter from "./QuestionFooter";
 
-function Question({data, id, userInfo, mode}) {
+function Question({data, id, userInfo, type}) {
     const [ solution, setSolution ] = useState([]);
     const { register, handleSubmit, reset, control,formState: { isSubmitting, isDirty, errors }} = useForm({
         defaultValues: useMemo(() => userInfo),
     });
 
     useEffect(() => {
+        // 로그인 체크
+        // const role = localStorage.getItem("role");
+        // if (type == 'license' && !role) {
+        //     alert('로그인이 필요합니다.');
+        //     window.location = "/login";
+        // }
+  
         // 솔루션 정보 조회
-        fetch("/api/solution", {
+        fetch(`/api/solution`, {
             method : 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,14 +37,23 @@ function Question({data, id, userInfo, mode}) {
 
     // 문의글 작성
     const onsubmit = (formData) => {
-        const user = localStorage.getItem("user") || null;
+        let userId = '';
+        let url = ''; 
 
-        fetch("/api/question", {
+        if(type == 'question') {
+            url = "/api/question";
+
+        } else if(type == 'license') {
+            userId = localStorage.getItem("user");
+            url = "/api/license-question";
+        }
+
+        fetch(url , {
             method : 'post',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({...formData, userId : user})
+            body: JSON.stringify({...formData, userId : userId})
         })
             .then((res) => res.json())
             .then((json) => {
@@ -222,7 +238,7 @@ function Question({data, id, userInfo, mode}) {
                 </div>
             </div>
 
-            {!data && <QuestionFooter errors={errors} register={register} mode={mode} />}
+            {!data && <QuestionFooter errors={errors} register={register} type={type} />}
         </form>
     );
 }

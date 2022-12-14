@@ -5,6 +5,7 @@ import ManagementModal from "../admin/management/ManagementModal";
 import MyLicneseModal from "../../components/my-license/MyLicenseModal"
 
 function Modal(props) {
+
     const { open, close, header, modal } = props;
 
     return (
@@ -19,13 +20,14 @@ function Modal(props) {
                     </header>
                     {
                         modal.type == "question" && 
-                        <main><Question id={modal.id} mode='modal' userInfo={modal.userInfo}/></main>
+                        <main><Question id={modal.id} type='license' userInfo={modal.userInfo}/></main>
                     }
                     {
                         modal.type == "management" && 
                         <main><ManagementModal 
                             data={modal.data} 
                             reload={modal.reload}
+                            type={modal.managementType}
                         /></main>
                     }
                     {

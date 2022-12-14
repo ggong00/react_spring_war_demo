@@ -15,7 +15,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class MailDto {
-    private String address;
+    private Long questionId;
+    private String email;
     private String mailTitle;
     private String message;
     private List<MultipartFile> attachFileList = new ArrayList<>();

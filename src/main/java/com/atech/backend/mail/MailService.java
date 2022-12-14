@@ -29,7 +29,7 @@ public class MailService {
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         mimeMessageHelper.setSubject(mailDto.getMailTitle());
         mimeMessageHelper.setText(mailDto.getMessage(), true);
-        mimeMessageHelper.setTo(mailDto.getAddress());
+        mimeMessageHelper.setTo(mailDto.getEmail());
         mimeMessageHelper.setFrom(FROM_ADDRESS);
 
         if (!CollectionUtils.isEmpty(mailDto.getAttachFileList())) {
@@ -54,6 +54,15 @@ public class MailService {
         html.append("           <div>솔루션 URL : <span>" + licenseReq.getSitePass() + "</span></div> ");
         html.append("           <div>솔루션 비밀번호 : <a  href=\"" + licenseReq.getSiteUrl() + "\" target=\"_blank\"> 바로가기 </a></div> ");
         html.append("       </div> ");
+        html.append("   </div> ");
+
+        return html.toString();
+    }
+
+    public String createMailHTML(MailDto mailDto) {
+        StringBuffer html = new StringBuffer();
+        html.append("   <div style=\"width: 100%; padding: 8px; font-size: 12px;\"> ");
+        html.append("       <div style=\"word-break: break-all;\">" + mailDto.getMessage() + "</div> ");
         html.append("   </div> ");
 
         return html.toString();

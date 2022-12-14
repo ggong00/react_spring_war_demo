@@ -24,15 +24,14 @@ public class QuestionDAOImpl implements QuestionDAO{
     public void insert(Question question) {
         StringBuffer sql = new StringBuffer();
         sql.append(" INSERT INTO question ");
-        sql.append(" (solution_id,user_id,belong,name,position,tel,email,title,`contents`,create_dtm) ");
-        sql.append(" VALUES(?,?,?,?,?,?,?,?,?,NOW()) ");
+        sql.append(" (solution_id,belong,name,position,tel,email,title,`contents`,create_dtm) ");
+        sql.append(" VALUES(?,?,?,?,?,?,?,?,NOW()) ");
 
         log.info("question {}", question);
 
         jdbcTemplate.update(
                 sql.toString(),
                 question.getSolution().getSolutionId(),
-                question.getUser().getUserId(),
                 question.getBelong(),
                 question.getName(),
                 question.getPosition(),
@@ -45,7 +44,7 @@ public class QuestionDAOImpl implements QuestionDAO{
     @Override
     public List<Question> findAll(String status) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" SELECT t1.*, t2.solution_name FROM question t1 ");
+        sql.append(" SELECT * FROM question t1 ");
         sql.append(" INNER JOIN solution t2 on t1.solution_id = t2.solution_id ");
         sql.append(" WHERE res_yn like ? ");
 
@@ -54,16 +53,14 @@ public class QuestionDAOImpl implements QuestionDAO{
             sql.append(" AND res_yn != 'DELETE' ");
         }
 
-        sql.append(" ORDER BY create_dtm ");
+        sql.append(" ORDER BY t1.create_dtm ");
 
         List<Question> questionList = jdbcTemplate.query(sql.toString(), new RowMapper<Question>() {
             @Override
             public Question mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Question question = (new BeanPropertyRowMapper<>(Question.class)).mapRow(rs, rowNum);
                 Solution solution = (new BeanPropertyRowMapper<>(Solution.class)).mapRow(rs, rowNum);
-                User user = (new BeanPropertyRowMapper<>(User.class)).mapRow(rs, rowNum);
                 question.setSolution(solution);
-                question.setUser(user);
 
                 return question;
             }

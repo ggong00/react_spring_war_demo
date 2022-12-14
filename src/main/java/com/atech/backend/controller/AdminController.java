@@ -1,11 +1,14 @@
 package com.atech.backend.controller;
 
 import com.atech.backend.dto.LicenseDTO;
+import com.atech.backend.dto.LicenseQuestionDTO;
 import com.atech.backend.dto.QuestionDTO;
 import com.atech.backend.dto.UserDTO;
+import com.atech.backend.mail.MailDto;
 import com.atech.backend.response.ResponseCode;
 import com.atech.backend.response.ResponseMsg;
 import com.atech.backend.service.License.LicenseService;
+import com.atech.backend.service.license_question.LicenseQuestionService;
 import com.atech.backend.service.question.QuestionService;
 import com.atech.backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,17 +32,52 @@ public class AdminController {
 
     final private UserService userService;
     final private QuestionService questionService;
+    final private LicenseQuestionService licenseQuestionService;
     final private LicenseService licenseService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/api/admin/question")
-    public ResponseEntity findAll(@RequestParam("status") String status) {
+    public ResponseEntity findAllByQuestion(
+            @RequestParam("status") String status) {
 
         // 문의글 전체 조회
         List<QuestionDTO.QuestionRes> questionResList = questionService.findAll(status);
 
         return new ResponseEntity(
                 ResponseMsg.create(ResponseCode.SUCCESS, questionResList),
+                HttpStatus.OK
+        );
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/api/admin/license_question")
+    public ResponseEntity findAllByLicenseQuestion(
+            @RequestParam("status") String status) {
+
+        // 문의글 전체 조회
+        List<LicenseQuestionDTO.LicenseQuestionRes> licenseQuestionResList = licenseQuestionService.findAll(status);
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS, licenseQuestionResList),
+                HttpStatus.OK
+        );
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/api/admin/license-question/{licenseQuestionId}")
+    public ResponseEntity deleteLicenseQuestion(@PathVariable("licenseQuestionId") Long licenseQuestionId) {
+
+        Integer resultCnt = licenseQuestionService.deleteQuestion(licenseQuestionId);
+
+        if (resultCnt != 1) {
+            return new ResponseEntity(
+                    ResponseMsg.create(ResponseCode.FAIL),
+                    HttpStatus.OK
+            );
+        }
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS, resultCnt),
                 HttpStatus.OK
         );
     }
@@ -85,6 +123,19 @@ public class AdminController {
                     HttpStatus.OK
             );
         }
+
+        return new ResponseEntity(
+                ResponseMsg.create(ResponseCode.SUCCESS),
+                HttpStatus.OK
+        );
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/api/admin/mail")
+    public ResponseEntity sendMail(
+            @ModelAttribute MailDto mailDto) throws MessagingException, IOException {
+
+        questionService.sendMail(mailDto);
 
         return new ResponseEntity(
                 ResponseMsg.create(ResponseCode.SUCCESS),

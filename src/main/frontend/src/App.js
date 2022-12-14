@@ -37,7 +37,8 @@ function App() {
         tmpMenu.push(
             {id: "solution", name: "솔루션 소개", url: "/solution"},
             {id: "question", name: "문의하기", url: "/question"},
-            {id: "admin", name: "문의글 관리", url: "/admin/management"},
+            {id: "admin-question", name: "문의글 관리", url: "/admin/management/question"},
+            {id: "admin-license", name: "라이선스 관리", url: "/admin/management/license"},
             {id: "MyLicense", name: "내 라이선스", url: "/my_license"},
         )
         setMenu(tmpMenu);
@@ -85,7 +86,8 @@ function App() {
           <Route path="/solution" element={<Solution userInfo={userInfo}/>} />
           <Route path="/question" element={<QuestionPage userInfo={userInfo}/>} />
           <Route path="/my_license" element={<MyLicense userInfo={userInfo} reloadUserInfo={reloadUserinfo}/>} />
-          <Route path="/admin/management" element={<Management userInfo={userInfo}/>} />
+          <Route path="/admin/management/question" element={<Management userInfo={userInfo} type="question"/>} />
+          <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="license"/>} />
           <Route path="/login" element={<Login userInfo={userInfo} setSelectedMenu={setSelectedMenu}/>} />
         </Routes>
         {/*<Footer/>*/}

@@ -39,7 +39,7 @@ public class LicenseDTO {
     @ToString
     public static class MyLicenseReq {
         private Long solutionId;
-        private Long questionId;
+        private Long licenseQuestionId;
         private String userId;
         private String email;
         private String siteId;

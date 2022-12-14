@@ -5,7 +5,7 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "../../../assets/css/management.css";
 import Modal from "../../common/Modal";
 
-function Management(props) {
+function Management({type}) {
     const [data, setData] = useState([]);
     const [modal, setModal] = useState({});
     const [selectStatus, setSelectStatus] = useState("ALL");
@@ -17,9 +17,19 @@ function Management(props) {
             window.location = "/";
         }
         getData();
-    }, [selectStatus, dataReload]);
+    }, [selectStatus, dataReload, type]);
 
-    const columnDefs = [
+    const questionColumnDefs = [
+        { field: "belong", headerName: "소속", flex: 1, filter: false },
+        { field: "name", headerName: "성함", flex: 1, filter: false },
+        { field: "position", headerName: "직책", flex: 1, filter: false },
+        { field: "tel", headerName: "전화번호", flex: 1, filter: false },
+        { field: "solutionName", headerName: "신청 솔루션", flex: 1, filter: false },
+        // { field: "createDtm", headerName: "등록일", flex: 1, filter: false },
+        { field: "resYn", headerName: "상태", flex: 1, filter: false },
+    ];
+
+    const licenseColumnDefs = [
         { field: "belong", headerName: "소속", flex: 1, filter: false },
         { field: "name", headerName: "성함", flex: 1, filter: false },
         { field: "position", headerName: "직책", flex: 1, filter: false },
@@ -30,31 +40,40 @@ function Management(props) {
     ];
 
     const getData = () => {
-        fetch(`/api/admin/question?status=${selectStatus}`, {
+        let url = '';
+
+        if(type == 'question') {
+            url = `/api/admin/question?status=${selectStatus}`;
+
+        } else if(type == 'license') {
+            url = `/api/admin/license_question?status=${selectStatus}`;
+        }
+
+        fetch(url , {
             method : 'get'
         })
-            .then((res) => res.json())
-            .then((json) => {
-                if (json.code == "00") {
-                    const newMap = json.data.map(ele => {
-                        return {
-                            ...ele, 
-                            resYn: ele.resYn == 'SUCCESS' ?
-                             {txt:'지급완료', order: 2} 
-                             : ele.resYn == 'DELETE' ?
-                             {txt:'삭제', order: 3} : {txt:'대기', order: 1}
-                        }
-                    });
+        .then((res) => res.json())
+        .then((json) => {
+            if (json.code == "00") {
+                const newMap = json.data.map(ele => {
+                    return {
+                        ...ele, 
+                        resYn: ele.resYn == 'SUCCESS' ?
+                            {txt:'완료', order: 2} 
+                            : ele.resYn == 'DELETE' ?
+                            {txt:'보류', order: 3} : {txt:'신규', order: 1}
+                    }
+                });
 
-                    newMap.sort((a,b) => a.resYn.order - b.resYn.order);
+                newMap.sort((a,b) => a.resYn.order - b.resYn.order);
 
-                    const sortedMap = newMap.map(ele => {
-                        return {...ele, resYn: ele.resYn.txt};
-                    })
+                const sortedMap = newMap.map(ele => {
+                    return {...ele, resYn: ele.resYn.txt};
+                })
 
-                    setData(sortedMap);
-                }
-            });
+                setData(sortedMap);
+            }
+        });
     }
 
     const changeStatus = (e) => {
@@ -74,6 +93,7 @@ function Management(props) {
             type: 'management',
             data: data,
             reload: reload,
+            managementType: type,
             status : true,
         });
     };
@@ -97,19 +117,24 @@ function Management(props) {
     return (
         <div id="route-contents">
             <div className="management-contents">
-                <div id="contents-title">문의글 관리 페이지</div>
+                <div id="contents-title">
+                    {
+                        type == 'question' ? '문의글 관리' : 
+                        type == 'license' ? '라이선스 관리' : "문의글 관리"
+                    }    
+                </div>
 
                 <ul className="status-option" onClick={changeStatus}>
                     <li className={selectStatus == "ALL" ? 'selected' : ''} data-value='ALL'>전체</li>
-                    <li className={selectStatus == "NEW" ? 'selected' : ''} data-value='NEW'>대기</li>
-                    <li className={selectStatus == "SUCCESS" ? 'selected' : ''} data-value='SUCCESS'>지급완료</li>
+                    <li className={selectStatus == "NEW" ? 'selected' : ''} data-value='NEW'>신규</li>
+                    <li className={selectStatus == "SUCCESS" ? 'selected' : ''} data-value='SUCCESS'>완료</li>
                 </ul>
 
                 <div className="grid-wrap">
                     <div className="ag-theme-alpine"  style={{ width: "100%", height: "700px" }}>
                         <AgGridReact
                             rowData={data}
-                            columnDefs={columnDefs}
+                            columnDefs={type == 'question' ? questionColumnDefs : licenseColumnDefs}
                             pagination={true}
                             paginationPageSize={25}
                             onCellClicked={cellClickHandler}
@@ -124,7 +149,7 @@ function Management(props) {
             <Modal
                 open={modal.status}
                 close={closeModal}
-                header="문의글 상세정보"
+                header={type == 'question' ? '상세 정보 (문의)' : '상세 정보 (라이선스)'}
                 modal={modal}
             >
             </Modal>

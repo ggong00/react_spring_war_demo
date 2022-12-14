@@ -7,7 +7,7 @@ function QuestionPage({userInfo}) {
             <div className="container">
                 {/*<div id="contents-title">문의하기</div>*/}
                 <h2>문의하기</h2>
-                <Question userInfo={userInfo}/>
+                <Question userInfo={userInfo} type="question"/>
             </div>
         </div>
     );

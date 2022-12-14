@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../common/Button";
 import Question from "../../common/Question"
 import CreateUser from "../CreateUser";
 import CreateLicense from "../CreateLicense";
+import SendMail from "../SendMail";
 import "../../../assets/css/management-modal.css"
 
-function ManagementModal({data, reload}) {
+function ManagementModal({data, reload, type}) {
     const [isUserDupl ,setIsUserDupl] = useState();
+    console.log(type)
 
     useEffect(() => {
 
@@ -39,8 +40,9 @@ function ManagementModal({data, reload}) {
     return (
         <>
             <Question data={data}/>
-            {data.resYn == '대기' && !isUserDupl && <CreateUser data={data} reset={reset}/>}
-            {data.resYn == '대기' && <CreateLicense data={data} reload={reload}/>}
+            {data.resYn == '신규' && !isUserDupl && <CreateUser data={data} reset={reset}/>}
+            {data.resYn == '신규' && type == 'license' && <CreateLicense data={data} reload={reload}/>}
+            {data.resYn == '신규' && type == 'question' && <SendMail data={data} reload={reload}/>}
         </>
     );
 }

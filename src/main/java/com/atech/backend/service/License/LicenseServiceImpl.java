@@ -6,6 +6,7 @@ import com.atech.backend.mail.MailDto;
 import com.atech.backend.mail.MailService;
 import com.atech.backend.repository.license.LicenseDAO;
 import com.atech.backend.repository.license.MyLicense;
+import com.atech.backend.repository.license_question.LicenseQuestionDAO;
 import com.atech.backend.repository.question.Question;
 import com.atech.backend.repository.question.QuestionDAO;
 import com.atech.backend.repository.user.User;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 public class LicenseServiceImpl implements LicenseService {
 
     final private LicenseDAO licenseDAO;
-    final private QuestionDAO questionDAO;
+    final private LicenseQuestionDAO licenseQuestionDAO;
     final private MailService mailService;
 
     @Override
@@ -35,19 +36,21 @@ public class LicenseServiceImpl implements LicenseService {
 
         //라이선스 지급
         Integer resultCnt1 = licenseDAO.createLicense(myLicenseReq.toEntity());
-        Integer resultCnt2 = questionDAO.changeStatus(Question.STATUS_SUCCESS, myLicenseReq.getQuestionId());
+        Integer resultCnt2 = licenseQuestionDAO.changeStatus(Question.STATUS_SUCCESS, myLicenseReq.getLicenseQuestionId());
 
         //메일 전송
-        String licenseHTML = mailService.createLicenseHTML(myLicenseReq);
-        MailDto mailDto = new MailDto();
-        mailDto.setAddress(myLicenseReq.getEmail());
-        mailDto.setMailTitle(myLicenseReq.getMailTitle());
-        mailDto.setMessage(licenseHTML);
-        mailDto.setAttachFileList(myLicenseReq.getAttachFileList());
+        if(resultCnt1 + resultCnt2 == 2) {
+            String licenseHTML = mailService.createLicenseHTML(myLicenseReq);
+            MailDto mailDto = new MailDto();
+            mailDto.setEmail(myLicenseReq.getEmail());
+            mailDto.setMailTitle(myLicenseReq.getMailTitle());
+            mailDto.setMessage(licenseHTML);
+            mailDto.setAttachFileList(myLicenseReq.getAttachFileList());
 
-        mailService.sendMail(mailDto);
+            mailService.sendMail(mailDto);
+        }
 
-        return resultCnt1 + resultCnt2 != 2 ? false : true;
+        return resultCnt1 + resultCnt2 == 2 ? true : false;
     }
 
     @Override

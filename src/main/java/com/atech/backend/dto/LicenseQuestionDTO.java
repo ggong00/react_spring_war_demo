@@ -1,18 +1,18 @@
 package com.atech.backend.dto;
 
-import com.atech.backend.repository.question.Question;
+import com.atech.backend.repository.license_question.LicenseQuestion;
 import com.atech.backend.repository.solution.Solution;
 import com.atech.backend.repository.user.User;
 import lombok.*;
 
 @Data
-public class QuestionDTO {
+public class LicenseQuestionDTO {
 
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class QuestionRes {
-        private Long questionId;
+    public static class LicenseQuestionRes {
+        private Long licenseQuestionId;
         private Long solutionId;
         private String userId;
         private String solutionName;
@@ -32,29 +32,23 @@ public class QuestionDTO {
     @NoArgsConstructor
     @Builder
     @ToString
-    public static class QuestionReq {
-        private Long questionId;
+    public static class LicenseQuestionReq {
+        private Long licenseQuestionId;
         private Long solutionId;
-        private String belong;
-        private String name;
-        private String position;
-        private String tel;
-        private String email;
+        private String userId;
         private String title;
         private String contents;
 
-        public Question toEntity(){
+        public LicenseQuestion toEntity(){
             Solution solution = new Solution();
             solution.setSolutionId(this.solutionId);
+            User user = new User();
+            user.setUserId(this.userId);
 
-            return Question.builder()
-                    .questionId(this.questionId)
+            return LicenseQuestion.builder()
+                    .licenseQuestionId(this.licenseQuestionId)
                     .solution(solution)
-                    .name(this.name)
-                    .position(this.position)
-                    .tel(this.tel)
-                    .email(this.email)
-                    .belong(this.belong)
+                    .user(user)
                     .title(this.title)
                     .contents(this.contents)
                     .build();

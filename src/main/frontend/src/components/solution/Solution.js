@@ -66,6 +66,14 @@ function Solution({userInfo}) {
 
     // 모달
     const openModal = () => {
+
+        // 로그인 체크
+        const role = localStorage.getItem("role");
+        if (!role) {
+            alert('로그인이 필요합니다.');
+            window.location = "/login";
+        }
+
         setModal({
             ...modal,
             type: 'question',
