@@ -9,6 +9,7 @@ import Solution from "./components/solution/Solution";
 import MyLicense from "./components/my-license/MyLicense";
 import Management from "./components/admin/management/Management";
 import QuestionPage from "./components/question/QuestionPage";
+import Footer from "./components/common/Footer";
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -88,7 +89,7 @@ function App() {
           <Route path="/admin/management" element={<Management userInfo={userInfo}/>} />
           <Route path="/login" element={<Login userInfo={userInfo} setSelectedMenu={setSelectedMenu}/>} />
         </Routes>
-        {/*<Footer/>*/}
+        <Footer/>
       </div>
   );
 }

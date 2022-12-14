@@ -544,23 +544,24 @@ body {
 
 /* FOOTER */
 .footer {
-  padding: 1.5em 0;
-  background: #333;
-  height: 7.5em;
-}
-.footer .container {
-  display: flex;
+  padding: 3em 0 2em; background: #212B4E;
+  /*background: #333;*/
+  /*height: 7.5em;*/
 }
 .footer .footer_logo {
-  margin-right: 5em;
+  display: flex; height: 2em; margin-bottom: 1em;
 }
+.footer .footer_logo img {height: 100%; }
+.footer .footer_logo span {font-family: 'HallymGothic'; font-size: 1.5em; color: #9EA3B7; margin-left: .375em; }
+
 .footer .footer_info {
-  color: #fff;
+  /*color: #fff;*/ font-weight: 300; color: #9EA3B7; text-align: left;
 }
-.footer .footer_info .footer_addr {
-  display: flex;
-  flex-direction: column;
-}
+.footer .footer_info .footer_addr { }
+.footer .footer_info .footer_addr span {position: relative; margin-left: 1em; padding-left: 1em; }
+.footer .footer_info .footer_addr span:first-child {margin-left: 0; padding-left: 0; }
+.footer .footer_info .footer_addr span:before {display: block; content: ''; position: absolute; left: 0; top: calc(50% - 5px); width: 2px; height: 10px; background: #58617E; }
+.footer .footer_info .footer_addr span:first-child:before {display: none; }
 
 .required {
   display: inline-block;

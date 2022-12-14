@@ -122,12 +122,6 @@ function Solution({userInfo}) {
                                 })
                             }
                         </ul>
-                        {/*<div className="question-wrap">*/}
-                        {/*    <button*/}
-                        {/*        className="btn-question"*/}
-                        {/*        onClick={openModal}*/}
-                        {/*    >15일 무료체험 신청하기</button>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
 
@@ -136,7 +130,7 @@ function Solution({userInfo}) {
                     <ul className="license-info">
                         {licenseInfo.map((m) => {
                             return (
-                                <li key={m.id}>
+                                <li key={m.id} id={m.id}>
                                     <div className="card">
                                         <div className="card_header">
                                             <h6>{m.name}</h6>
