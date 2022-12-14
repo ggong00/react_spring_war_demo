@@ -1,6 +1,6 @@
 .management-contents {
-    width: 60%;
-    margin: 56px auto;
+    /*width: 60%;*/
+    /*margin: 56px auto;*/ margin: 0 auto; width: 80%;
 }
 .grid-wrap {
     width: 100%;

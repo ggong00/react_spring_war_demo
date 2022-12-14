@@ -21,7 +21,7 @@ function Footer(props) {
                         <span>주소 : (44547) 울산광역시 중구 종가로 655, 2F-307호(서동, 혁신센트럴시티)</span>
                         <span>Tel : 052-281-4780</span>
                     </div>
-                    <div><b style={highlight_font}>고객지원</b> : <b style={highlight_font}>전화 상담</b> 평일 9:00-18:00 또는 <a href="" style={btn_link}>문의하기</a></div>
+                    <div><b style={highlight_font}>고객지원</b> : <b style={highlight_font}>전화 상담</b> 평일 9:00-18:00 또는 <a href="/question" style={btn_link}>문의하기</a></div>
 
                     <div className="footer_copyright" style={{marginTop: '1em'}}><b>©A-TECH COMPANY. ALL RIGHTS RESERVED.</b></div>
                 </div>

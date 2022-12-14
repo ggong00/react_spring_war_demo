@@ -14,7 +14,7 @@
 /*    margin: 32px 0;*/
 /*    width: 50%;*/
 /*}*/
-.login_wrap {width: 500px; margin: 0 auto; margin-top: 8.5em; padding: 3em 2em; border: 1px solid #ddd; box-shadow: 10px 10px 10px rgb(225 231 255 / 25%); border-radius: 1.25em; }
+.login_wrap {width: 500px; margin: 0 auto; margin-top: 8.5em; margin-bottom: 8.5em; padding: 3em 2em; border: 1px solid #ddd; box-shadow: 10px 10px 10px rgb(225 231 255 / 25%); border-radius: 1.25em; }
 .login_wrap .logo { }
 .login_wrap .logo img {width: 25%; }
 .login_wrap .form_control {width: 100%; font-size: 1.125em; }

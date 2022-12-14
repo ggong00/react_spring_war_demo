@@ -57,9 +57,9 @@ function Management({type}) {
             if (json.code == "00") {
                 const newMap = json.data.map(ele => {
                     return {
-                        ...ele, 
+                        ...ele,
                         resYn: ele.resYn == 'SUCCESS' ?
-                            {txt:'완료', order: 2} 
+                            {txt:'완료', order: 2}
                             : ele.resYn == 'DELETE' ?
                             {txt:'보류', order: 3} : {txt:'신규', order: 1}
                     }
@@ -116,32 +116,33 @@ function Management({type}) {
 
     return (
         <div id="route-contents">
-            <div className="management-contents">
-                <div id="contents-title">
+            <div className="container">
+                <h2>
                     {
-                        type == 'question' ? '문의글 관리' : 
+                        type == 'question' ? '문의글 관리' :
                         type == 'license' ? '라이선스 관리' : "문의글 관리"
-                    }    
-                </div>
+                    }
+                </h2>
+                <div className="management-contents">
+                    <ul className="status-option" onClick={changeStatus}>
+                        <li className={selectStatus == "ALL" ? 'selected' : ''} data-value='ALL'>전체</li>
+                        <li className={selectStatus == "NEW" ? 'selected' : ''} data-value='NEW'>신규</li>
+                        <li className={selectStatus == "SUCCESS" ? 'selected' : ''} data-value='SUCCESS'>완료</li>
+                    </ul>
 
-                <ul className="status-option" onClick={changeStatus}>
-                    <li className={selectStatus == "ALL" ? 'selected' : ''} data-value='ALL'>전체</li>
-                    <li className={selectStatus == "NEW" ? 'selected' : ''} data-value='NEW'>신규</li>
-                    <li className={selectStatus == "SUCCESS" ? 'selected' : ''} data-value='SUCCESS'>완료</li>
-                </ul>
-
-                <div className="grid-wrap">
-                    <div className="ag-theme-alpine"  style={{ width: "100%", height: "700px" }}>
-                        <AgGridReact
-                            rowData={data}
-                            columnDefs={type == 'question' ? questionColumnDefs : licenseColumnDefs}
-                            pagination={true}
-                            paginationPageSize={25}
-                            onCellClicked={cellClickHandler}
-                            overlayNoRowsTemplate={
-                                "문의글이 없습니다."
-                            }
-                        />
+                    <div className="grid-wrap">
+                        <div className="ag-theme-alpine"  style={{ width: "100%", height: "700px" }}>
+                            <AgGridReact
+                                rowData={data}
+                                columnDefs={type == 'question' ? questionColumnDefs : licenseColumnDefs}
+                                pagination={true}
+                                paginationPageSize={25}
+                                onCellClicked={cellClickHandler}
+                                overlayNoRowsTemplate={
+                                    "문의글이 없습니다."
+                                }
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
