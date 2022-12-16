@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import AuthMail from "../common/AuthMail";
 import 'react-phone-number-input/style.css'
 import '../../assets/css/join.css'
@@ -9,6 +10,7 @@ function Join({setSelectedMenu}) {
     const { register, handleSubmit, reset, control, watch, getValues, formState: { isSubmitting, isDirty, errors }} = useForm();
     const [ mailSuccess, setMailSuccess] = useState();
     const [ idSuccess, setIdSuccess] = useState();
+    const navigate = useNavigate();
 
     const success = () => {
         setMailSuccess(true);
@@ -19,9 +21,9 @@ function Join({setSelectedMenu}) {
     }
 
     useEffect(() => {
-        console.log('test')
         if (localStorage.getItem("user")) {
-            window.location = "/";
+            // window.location = "/";
+            navigate("/");
         }
 
         setSelectedMenu("join");
@@ -40,7 +42,8 @@ function Join({setSelectedMenu}) {
             .then((json) => {
                 if (json.code == "00") {
                     alert("회원가입이 완료되었습니다.");
-                    window.location = '/login';
+                    navigate('/login');
+                    // window.location = '/login';
                 }
             }
             )
@@ -60,6 +63,13 @@ function Join({setSelectedMenu}) {
     }
 
     const idDuplChk = () => {
+        if(idSuccess) return;
+
+        if(!watch("userId")) {
+            alert('아이디를 입력해주세요.');
+            return;
+        }
+
         fetch("/api/user/dupl-check", {
             method : 'post',
             headers: {

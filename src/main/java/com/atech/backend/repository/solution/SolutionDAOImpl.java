@@ -15,7 +15,7 @@ public class SolutionDAOImpl implements SolutionDAO {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Solution> findALlBySolution() {
+    public List<Solution> findAllSolution() {
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT * FROM solution ");
 
@@ -28,7 +28,45 @@ public class SolutionDAOImpl implements SolutionDAO {
     }
 
     @Override
-    public List<Detail> findALlByDetail(Long solutionId) {
+    public void updateSolution(Solution solution) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" UPDATE solution ");
+        sql.append(" SET solution_name = ? ");
+        sql.append(" where solution_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                solution.getSolutionName(),
+                solution.getSolutionId()
+        );
+    }
+
+    @Override
+    public void deleteSolution(Solution solution) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" DELETE solution ");
+        sql.append(" where solution_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                solution.getSolutionId()
+        );
+    }
+
+    @Override
+    public void insertSolution(Solution solution) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" INSERT INTO solution (solution_name)");
+        sql.append(" values(?) ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                solution.getSolutionName()
+        );
+    }
+
+    @Override
+    public List<Detail> findAllDetail(Long solutionId) {
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT * FROM detail ");
         sql.append(" where solution_id = ? ");
@@ -43,7 +81,46 @@ public class SolutionDAOImpl implements SolutionDAO {
     }
 
     @Override
-    public List<License> findALlByLicense(Long solutionId) {
+    public void updateDetail(Detail detail) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" UPDATE detail ");
+        sql.append(" SET contents = ? ");
+        sql.append(" where detail_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                detail.getContents(),
+                detail.getDetailId()
+        );
+    }
+
+    @Override
+    public void deleteDetail(Detail detail) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" DELETE detail ");
+        sql.append(" where detail_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                detail.getDetailId()
+        );
+    }
+
+    @Override
+    public void insertDetail(Long solutionId, Detail detail) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" INSERT INTO detail (solution_id, contents)");
+        sql.append(" values(?,?) ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                solutionId,
+                detail.getContents()
+        );
+    }
+
+    @Override
+    public List<License> findAllLicense(Long solutionId) {
         StringBuffer sql = new StringBuffer();
         sql.append(" SELECT * FROM license ");
         sql.append(" where solution_id = ? ");
@@ -55,5 +132,53 @@ public class SolutionDAOImpl implements SolutionDAO {
         );
 
         return licenseList;
+    }
+
+    @Override
+    public void updateLicense(License license) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" UPDATE license ");
+        sql.append(" SET basic = ? ");
+        sql.append(" SET premium = ? ");
+        sql.append(" SET custom = ? ");
+        sql.append(" SET type = ? ");
+        sql.append(" where license_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                license.getBasic(),
+                license.getPremium(),
+                license.getCustom(),
+                license.getType(),
+                license.getLicenseId()
+        );
+    }
+
+    @Override
+    public void deleteLicense(License license) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" DELETE license ");
+        sql.append(" where license_id = ? ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                license.getLicenseId()
+        );
+    }
+
+    @Override
+    public void insertLicense(Long solutionId, License license) {
+        StringBuffer sql = new StringBuffer();
+        sql.append(" INSERT INTO license (solution_id, basic, premium, custom, type)");
+        sql.append(" values(?,?,?,?,?) ");
+
+        jdbcTemplate.update(
+                sql.toString(),
+                solutionId,
+                license.getBasic(),
+                license.getPremium(),
+                license.getCustom(),
+                license.getType()
+        );
     }
 }

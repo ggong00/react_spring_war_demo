@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import "../../assets/css/question.css"
 import 'react-phone-number-input/style.css'
@@ -10,6 +11,7 @@ function Question({data, id, userInfo, type}) {
     const { register, handleSubmit, reset, control,formState: { isSubmitting, isDirty, errors }} = useForm({
         defaultValues: useMemo(() => userInfo),
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
   
@@ -53,7 +55,8 @@ function Question({data, id, userInfo, type}) {
             .then((json) => {
                 if (json.code == "00") {
                     alert("답변은 이메일로 보내드립니다.");
-                    window.location = "/";
+                    // window.location = "/";
+                    navigate("/");
                 }
             }
             )

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGear } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import Modal from "../../components/common/Modal";
 import "../../assets/css/my-license.css";
 
 function MyLicense({userInfo, reloadUserInfo}) {
     const [myLicenseData, setMyLicenseData] = useState([]);
     const [modal, setModal] = useState({})
+    const navigate = useNavigate();
 
     useEffect(() => {
         const role = localStorage.getItem("role");
         if (!role) {
-
-            window.location = "/";
+            // window.location = "/";
+            navigate("/");
         }
         getData();
     }, []);

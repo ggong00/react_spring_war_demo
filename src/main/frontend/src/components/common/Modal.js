@@ -3,6 +3,7 @@ import "../../assets/css/modal.css";
 import Question from "../common/Question";
 import ManagementModal from "../admin/management/ManagementModal";
 import MyLicneseModal from "../../components/my-license/MyLicenseModal"
+import SolutionManagementModal from "../admin/sysyem/solution-management/SolutionManagementModal";
 
 function Modal(props) {
 
@@ -33,6 +34,10 @@ function Modal(props) {
                     {
                         modal.type == "my-license" && 
                         <main><MyLicneseModal userInfo={modal.userInfo} reload={modal.reload}/></main>
+                    }
+                    {
+                        modal.type == "solution-management" && 
+                        <main><SolutionManagementModal solution={modal.solution} reload={modal.reload}/></main>
                     }
                 </section>
             ) : null}

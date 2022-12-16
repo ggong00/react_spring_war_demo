@@ -8,4 +8,6 @@ import java.util.List;
 public interface SolutionService {
 
     List<SolutionDTO.SolutionRes> findALl();
+    void update(SolutionDTO.SolutionReq solutionReq);
+    void insert(SolutionDTO.SolutionReq solutionReq);
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -10,11 +11,13 @@ function Management({type}) {
     const [modal, setModal] = useState({});
     const [selectStatus, setSelectStatus] = useState("ALL");
     const [dataReload, setDataReload] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const role = localStorage.getItem("role");
         if (!role || role != "ROLE_ADMIN") {
-            window.location = "/";
+            navigate("/");
+            // window.location = "/";
         }
         getData();
     }, [selectStatus, dataReload, type]);

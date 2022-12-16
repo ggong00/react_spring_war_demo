@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import "../../assets/css/login.css";
 
 function Login({setSelectedMenu}) {
     const { register, handleSubmit, formState: { isSubmitting, isDirty, errors }} = useForm();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (localStorage.getItem("user")) {
-            window.location = "/";
+            // window.location = "/";
+            navigate('/');
         }
 
         setSelectedMenu("login");
@@ -29,6 +32,7 @@ function Login({setSelectedMenu}) {
                     localStorage.setItem("user", json.data.userId);
                     localStorage.setItem("role", json.data.role);
                     window.location = "/";
+                    // navigate('/');
                 }
 
                 // 로그인 실패

@@ -1,0 +1,120 @@
+/* 시스템 */
+.system {
+    height: 800px;
+    width: 1200px;
+    font-size: 20px;
+    margin:  84px auto;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+}
+.system .title {
+    text-align: start;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.system .system-nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 32px;
+    color: rgb(124, 131, 131);
+}
+.system .system-nav li {
+    cursor: pointer;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    text-align: start;
+}
+.system .system-main {
+    display: flex;
+    flex-direction: column;
+}
+.system .system-main .header {
+    flex: 1;
+}
+.system .system-main .body {
+    flex: 10;
+}
+.system .selected {
+    color: rgb(0, 0, 0);
+}
+
+/*  솔루션 관리 */
+.solution-management input[type=text] {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    margin: 8px 0;
+    border: 1px solid rgba(155, 150, 150, 0.61);
+    border-radius: 8px;
+}
+.solution-management {
+    height: 100%;
+}
+.solution-management .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.solution-management .header input[type=text] {
+    flex: 2;
+    padding: 14px;
+    margin: 12px 0;
+}
+.solution-management .header button {
+    flex: 0.1;
+    padding: 14px;
+    margin: 12px;
+    margin-right: 0;
+}
+.solution-management main button {
+    display: inline-block;
+    width: 20%;
+    cursor: pointer;
+    padding: 6px;
+    margin: 4px 0;
+    margin-right: 6px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    color: rgb(0, 0, 0);
+}
+.solution-management main .add {
+    background-color: #3fff0f60;
+}
+.solution-management main .delete {
+    background-color: rgba(255, 17, 0, 0.452);
+}
+
+/* 솔루션 모달 */
+.solution-management .modal main {
+    padding: 24px;
+}
+.solution-management .modal main .title{
+    font-size: 24px;
+}
+.solution-management .mgm-detail {
+    display: flex;
+    flex-direction: column;
+}
+.solution-management .btn-wrap {
+    display: flex;
+}
+.solution-management .mgm-detail .detail-li{
+    cursor: pointer;
+    padding: 2px;
+    text-align: start;
+}
+.solution-management .mgm-detail .selected {
+    background-color: rgba(103, 104, 109, 0.281);
+}
+.solution-management .mgm-license table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+.solution-management .mgm-license table td {
+    border: none;
+}
+

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../assets/css/solution.css";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -20,6 +21,7 @@ function Solution({userInfo}) {
     const [solution, setSolution] = useState([]);
     const [selectedNav, setSelectedNav] = useState("");
     const [modal, setModal] = useState({});
+    const navigate = useNavigate();
 
     const [solutionInfo, setSolutionInfo] = useState({
         1: `작업지시에서 완성품까지\n생산활동을 추적/최적화`,
@@ -71,7 +73,8 @@ function Solution({userInfo}) {
         const role = localStorage.getItem("role");
         if (!role) {
             alert('로그인이 필요합니다.');
-            window.location = "/login";
+            navigate("/login");
+            // window.location = "/login";
         }
 
         setModal({

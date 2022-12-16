@@ -10,6 +10,7 @@ import Solution from "./components/solution/Solution";
 import MyLicense from "./components/my-license/MyLicense";
 import Management from "./components/admin/management/Management";
 import QuestionPage from "./components/question/QuestionPage";
+import System from "./components/admin/sysyem/System";
 import Footer from "./components/common/Footer";
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
           <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="license"/>} />
           <Route path="/login" element={<Login setSelectedMenu={setSelectedMenu}/>} />
           <Route path="/join" element={<Join setSelectedMenu={setSelectedMenu}/>} />
+          <Route path="/system" element={<System setSelectedMenu={setSelectedMenu}/>} />
         </Routes>
         <Footer/>
       </div>

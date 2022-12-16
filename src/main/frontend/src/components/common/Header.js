@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 
 function Header({menu, selectedMenu, setSelectedMenu}) {
+    const navigate = useNavigate();
 
     const onLogout = () => {
         localStorage.removeItem("user")
@@ -17,6 +19,7 @@ function Header({menu, selectedMenu, setSelectedMenu}) {
             .then((json) => {
                 if (json.code == "07") {
                     window.location = "/";
+                    // navigate("/");
                 }
             });
     }
@@ -69,6 +72,10 @@ function Header({menu, selectedMenu, setSelectedMenu}) {
                                     <li>
                                         <a onClick={onLogout}>로그아웃</a>
                                     </li>
+                                    {localStorage.getItem("role") == "ROLE_ADMIN" &&
+                                     <li>
+                                        <Link to="/system">사이트 관리</Link>
+                                    </li>}
                                 </>
                             )}
                         </ul>
