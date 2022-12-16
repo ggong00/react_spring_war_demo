@@ -3,21 +3,14 @@
     /*height: 700px;*/
     /*margin: 0 auto;*/
     /*display: flex; justify-content: center;*/
+    padding: 6em 0;
 }
-/*.section1 {*/
-/*    flex: 2;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*}*/
-/*.section1 .logo img {*/
-/*    margin: 32px 0;*/
-/*    width: 50%;*/
-/*}*/
-.join_wrap {width: 500px; margin: 0 auto; margin-top: 8.5em; margin-bottom: 8.5em; padding: 3em 2em; border: 1px solid #ddd; box-shadow: 10px 10px 10px rgb(225 231 255 / 25%); border-radius: 1.25em; }
+.join-contents h2 {font-size: 2.5em; margin-bottom: 1em; }
+/*.join_wrap {width: 500px; margin: 0 auto; margin-top: 8.5em; margin-bottom: 8.5em; padding: 3em 2em; border: 1px solid #ddd; box-shadow: 10px 10px 10px rgb(225 231 255 / 25%); border-radius: 1.25em; }*/
+.join_wrap { }
 .join_wrap .title { font-size: 2em; width: auto;}
 .join_wrap .logo img {width: 25%; }
-.join_wrap .form_control {width: 100%; font-size: 1.125em; }
+.join_wrap .form_control {display: flex; width: 100%; font-size: 1.125em; }
 .join_wrap .btn {font-size: 1.125em; }
 .join_wrap .join-input {margin-top: 2em; }
 .join_wrap .input_group {margin-top: 1em; text-align: left; }

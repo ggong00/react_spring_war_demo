@@ -69,10 +69,11 @@ function AuthMail({to,success,fail,state}) {
         <>
             <div style={{
                 display: 'flex',
-                alignItems: 'center',
+                // alignItems: 'center',
                 margin: '16px 0px',
             }}>
                 <input
+                    className="form_control"
                     style={{
                         flex: '4',
                         padding: '6px',
@@ -92,9 +93,9 @@ function AuthMail({to,success,fail,state}) {
                         border: 'none',
                         borderRadius: '4px',
                         padding: '8px',
-                        color: 'white',
-                        margin: '0 4px',
-                    }} 
+                        fontSize: '.875em', color: 'white',
+                        marginLeft: '.5em',
+                    }}
                     type="button"
                     onClick={sendAuthMail}
                 >
@@ -108,12 +109,13 @@ function AuthMail({to,success,fail,state}) {
                         border: 'none',
                         borderRadius: '4px',
                         padding: '8px',
-                        color: 'white'
+                        fontSize: '.875em', fontWeight: "700", color: 'white',
+                        marginLeft: '.5em'
                     }} 
                     type="button"
                     onClick={onAuth}
                 >
-                    인증
+                    인증 확인
                 </button>
             </div>
         </>        
