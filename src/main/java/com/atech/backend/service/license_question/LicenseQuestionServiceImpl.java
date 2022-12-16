@@ -34,7 +34,7 @@ public class LicenseQuestionServiceImpl implements LicenseQuestionService {
 
     @Override
     public void insert(LicenseQuestionDTO.LicenseQuestionReq licenseQuestionReq) {
-        licenseQuestionDAO.insert(licenseQuestionReq.toEntity());
+        licenseQuestionDAO.insert(licenseQuestionReq.toEntity(), licenseQuestionReq.getType());
     }
 
     @Override

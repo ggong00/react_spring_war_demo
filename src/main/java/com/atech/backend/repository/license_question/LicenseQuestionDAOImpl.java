@@ -22,18 +22,19 @@ public class LicenseQuestionDAOImpl implements LicenseQuestionDAO {
     final private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void insert(LicenseQuestion licenseQuestion) {
+    public void insert(LicenseQuestion licenseQuestion, String type) {
         StringBuffer sql = new StringBuffer();
         sql.append(" INSERT INTO license_question ");
-        sql.append(" (solution_id,user_id,title,`contents`,create_dtm) ");
-        sql.append(" VALUES(?,?,?,?,NOW()) ");
+        sql.append(" (solution_id,user_id,title,`contents`,create_dtm,license_type) ");
+        sql.append(" VALUES(?,?,?,?,NOW(),?) ");
 
         jdbcTemplate.update(
                 sql.toString(),
                 licenseQuestion.getSolution().getSolutionId(),
                 licenseQuestion.getUser().getUserId(),
                 licenseQuestion.getTitle(),
-                licenseQuestion.getContents()
+                licenseQuestion.getContents(),
+                type
         );
     }
     @Override

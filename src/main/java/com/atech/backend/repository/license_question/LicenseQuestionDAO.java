@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LicenseQuestionDAO {
 
-    void insert(LicenseQuestion licenseQuestion);
+    void insert(LicenseQuestion licenseQuestion, String type);
 
     List<LicenseQuestion> findAll(String status);
 

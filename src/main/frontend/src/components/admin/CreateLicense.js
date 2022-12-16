@@ -58,7 +58,6 @@ function CreateLicense({data, reload}) {
     }
 
     const onDelete = () => {
-        console.log(data)
 
         fetch(`/api/admin/license-question/${data.licenseQuestionId}`, {
             method: 'delete',

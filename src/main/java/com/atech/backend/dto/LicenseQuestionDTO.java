@@ -38,6 +38,7 @@ public class LicenseQuestionDTO {
         private String userId;
         private String title;
         private String contents;
+        private String type;
 
         public LicenseQuestion toEntity(){
             Solution solution = new Solution();

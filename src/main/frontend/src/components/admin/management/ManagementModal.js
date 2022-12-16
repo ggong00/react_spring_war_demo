@@ -7,7 +7,6 @@ import "../../../assets/css/management-modal.css"
 
 function ManagementModal({data, reload, type}) {
     const [isUserDupl ,setIsUserDupl] = useState();
-    console.log(type)
 
     useEffect(() => {
 

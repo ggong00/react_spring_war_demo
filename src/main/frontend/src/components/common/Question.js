@@ -6,8 +6,8 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import QuestionFooter from "./QuestionFooter";
 
-function Question({data, id, userInfo, type}) {
-    const [ solution, setSolution ] = useState([]);
+function Question({data, id, name, userInfo, licenseInfo, changeModal, type}) {
+    const [ solutionList, setSolutionList ] = useState([]);
     const { register, handleSubmit, reset, control,formState: { isSubmitting, isDirty, errors }} = useForm({
         defaultValues: useMemo(() => userInfo),
     });
@@ -15,24 +15,26 @@ function Question({data, id, userInfo, type}) {
 
     useEffect(() => {
   
-        // 솔루션 정보 조회
+        // 전체 솔루션 정보 조회
         fetch(`/api/solution`, {
             method : 'get',
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-            .then((res) => res.json())
-            .then((json) => {
-                if (json.code == "00") {
-                    setSolution(json.data);
-                }
-            });
+        .then((res) => res.json())
+        .then((json) => {
+            if (json.code == "00") {
+                setSolutionList(json.data);
+            }
+        });
 
     }, []);
 
     // 문의글 작성
     const onsubmit = (formData) => {
+        if(!formData.solutionId) formData.solutionId = id;
+
         let userId = '';
         let url = ''; 
 
@@ -63,29 +65,119 @@ function Question({data, id, userInfo, type}) {
             .catch(error => {console.log(error)});
     }
 
-    return (
-        <form className="form-box" onSubmit={handleSubmit(onsubmit)}>
-            <div className="input-box category">
-                <div className="title">관심 제품 선택</div>
+    const cardStyle = {
+        background: '#f5f7f9', padding: '1em', border: '0', borderRadius: '.5em',
+        // display: 'flex',
+    }
 
-                <div className="inner-input">
-                    {!data ? (solution.map((ele) => {
-                        return (
-                            <div className="input" key={ele.solutionId}>
-                                <input
-                                    id={"solution-" + ele.solutionId}
-                                    type="radio"
-                                    name="solution"
-                                    value={ele.solutionId}
-                                    defaultChecked={id ? ele.solutionId == id && true : ele.solutionId == 1 && true}
-                                    {...register("solutionId")}
-                                />
-                                <label htmlFor={"solution-" + ele.solutionId}>{ele.solutionName}</label>
+    return (
+        <form className="form-box form-box2" onSubmit={handleSubmit(onsubmit)}>
+
+            { 
+                type == 'license' ? 
+                <div className="input-box">
+                    <ol className="type_info">
+                        <li style={{paddingRight: '1em'}}>
+                            <h5 style={{fontSize: '1.5em', marginBottom: '1em'}}>{name}</h5>
+
+                            <div>
+                                <h6 style={{fontSize: '1.125em'}}>제품 유형</h6>
+
+                                <dl className="type_list">
+                                    <dd>
+                                        <input 
+                                            type="radio" 
+                                            name="type" 
+                                            data-name="체험 상품" 
+                                            defaultValue='trial'
+                                            defaultChecked={licenseInfo.name == '체험 상품'}
+                                            {...register("type",{
+                                                onChange: changeModal
+                                            })}
+                                        /> 체험상품</dd>
+                                    <dd>
+                                        <input 
+                                            type="radio" 
+                                            name="type" 
+                                            data-name="Basic" 
+                                            defaultValue='basic'
+                                            defaultChecked={licenseInfo.name == 'Basic'}
+                                            {...register("type",{
+                                                onChange: changeModal
+                                            })}
+                                        /> Basic</dd>
+                                    <dd>
+                                        <input 
+                                            type="radio" 
+                                            name="type" 
+                                            data-name="Premium" 
+                                            defaultValue='premium'
+                                            defaultChecked={licenseInfo.name == 'Premium'}
+                                            {...register("type",{
+                                                onChange: changeModal
+                                            })}
+                                        /> Premium</dd>
+                                    <dd>
+                                        <input 
+                                            type="radio" 
+                                            name="type" 
+                                            data-name="맞춤형 상품" 
+                                            defaultValue='custom'
+                                            defaultChecked={licenseInfo.name == '맞춤형 상품'}
+                                            {...register("type",{
+                                                onChange: changeModal
+                                            })}
+                                        /> 맞춤형 상품</dd>
+                                </dl>
                             </div>
-                        )
-                    })) : (<div className="selected-solution">{data.solutionName}</div>)}
-                </div>
-            </div>
+
+                        </li>
+                        <li style={{paddingLeft: '1em'}}>
+                            <div className="cost_info" style={cardStyle}>
+                                <div style={{display:'flex', justifyContent: 'space-between'}}>
+                                    <span style={{marginTop: '.25em'}}>비용</span>
+                                    <dl>
+                                        <dd>
+                                            <span className="cost">{licenseInfo.license['연간 구독형'] == undefined ? '　' :licenseInfo.license['연간 구독형']}</span>
+                                            {licenseInfo.license['연간 구독형'] == undefined ? '' : ' / 연간 구독형'}
+                                        </dd>
+                                        <dd>
+                                            <span className="cost">{licenseInfo.license['영구 라이선스'] == undefined ? '0$' : licenseInfo.license['영구 라이선스']}</span>
+                                            {licenseInfo.license['연간 구독형'] == undefined ? ' / 15일' : ' / 영구 라이선스'}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <span style={{marginTop: '.5em', fontSize: '.875em', color: '#888', textAlign: 'right'}}>※설치비 및 부가세 별도</span>
+                        </li>
+                    </ol>
+                </div> : null
+            }
+            
+            { 
+                type == 'question' || type == 'management' ? 
+                <div className="input-box category">
+                    <div className="title">관심 제품 선택</div>
+
+                    <div className="inner-input">
+                        {!data ? (solutionList.map((ele) => {
+                            return (
+                                <div className="input" key={ele.solutionId}>
+                                    <input
+                                        id={"solution-" + ele.solutionId}
+                                        type="radio"
+                                        name="solution"
+                                        value={ele.solutionId}
+                                        defaultChecked={id ? ele.solutionId == id && true : ele.solutionId == 1 && true}
+                                        {...register("solutionId")}
+                                    />
+                                    <label htmlFor={"solution-" + ele.solutionId}>{ele.solutionName}</label>
+                                </div>
+                            )
+                        })) : (<div className="selected-solution">{data.solutionName}</div>)}
+                    </div>
+                </div> : null
+            }
 
             <div className="input-box text">
                 {/*<div className="title">소속</div>*/}

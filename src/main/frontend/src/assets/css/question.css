@@ -143,3 +143,8 @@
     text-align: start;
     margin: 0 12px;
 }
+
+.type_list {display: flex; margin-top: .5em; }
+.type_list dd {margin-left: 1em; display: flex; align-items: center; }
+.type_list dd:first-child {margin-left: 0; }
+.type_list dd input {margin-right: .25em; width: 20px; height: 20px; }

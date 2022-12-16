@@ -10,7 +10,6 @@ function EditInfo({userInfo, close}) {
     });
 
     const onsubmit = (formData) => {
-        console.log(formData)
 
         fetch("/api/user/info", {
             method : 'post',

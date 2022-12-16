@@ -30,7 +30,6 @@ function Join({setSelectedMenu}) {
     }, [idSuccess, mailSuccess])
 
     const onSubmit = (formData) => {
-        console.log(formData)
         fetch("/api/join", {
             method : 'post',
             headers: {

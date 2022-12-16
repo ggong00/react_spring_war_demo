@@ -31,7 +31,6 @@ function SolutionManagement(props) {
         .then((res) => res.json())
         .then((json) => {
             if (json.code == "00") {
-                console.log(json)
                 const processing = json.data
                     .filter(ele => ele.solutionId != 99)
                     .map(ele => ({...ele, detailCnt: ele.detail.length , licenseCnt: ele.license.length, imgCnt: 0}));

@@ -66,7 +66,6 @@ function SolutionManagement({solution, reload}) {
         .then((res) => res.json())
         .then((json) => {
                 if (json.code == "00") {
-                    console.log(json);
                 }
 
             }

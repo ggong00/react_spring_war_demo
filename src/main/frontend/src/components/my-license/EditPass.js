@@ -8,7 +8,6 @@ function EditPass({userInfo, close}) {
     });
 
     const onsubmit = (formData) => {
-        console.log(formData)
         fetch("/api/user/pass", {
             method : 'post',
             headers: {

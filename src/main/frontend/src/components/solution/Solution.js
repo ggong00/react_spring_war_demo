@@ -19,7 +19,8 @@ function License(licenseInfo, solution, idx){
 
 function Solution({userInfo}) {
     const [solution, setSolution] = useState([]);
-    const [selectedNav, setSelectedNav] = useState("");
+    const [selectedNav, setSelectedNav] = useState({});
+    const [selectedLicense, setSelectedLicense] = useState({});
     const [modal, setModal] = useState({});
     const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ function Solution({userInfo}) {
 
                     // 솔루션 정보 저장
                     setSolution(solution);
-                    setSelectedNav(solution[0].solutionId);
+                    setSelectedNav({id: solution[0].solutionId, name: solution[0].solutionName});
 
                     // 라이선스 정보 저장
                     License(licenseInfo, solution, 0);
@@ -61,13 +62,13 @@ function Solution({userInfo}) {
     }, []);
 
     const changeSolution = (e) => {
-        setSelectedNav(e.target.id);
+        setSelectedNav({id: e.target.id, name: e.target.dataset.name});
 
         License(licenseInfo, solution, e.target.id - 1);
     }
 
     // 모달
-    const openModal = () => {
+    const openModal = ({target}) => {
 
         // 로그인 체크
         const role = localStorage.getItem("role");
@@ -80,11 +81,15 @@ function Solution({userInfo}) {
         setModal({
             ...modal,
             type: 'question',
-            id: selectedNav,
+            id: selectedNav.id,
+            name: selectedNav.name,
             userInfo: userInfo,
+            licenseInfo: licenseInfo.find(ele => ele.name === target.dataset.name),
+            changeModal: changeModal,
             status : true
         });
     };
+
     const closeModal = () => {
         setModal({
             ...modal,
@@ -92,18 +97,24 @@ function Solution({userInfo}) {
         });
     };
 
+    const changeModal = (e) => {
+        closeModal();
+        openModal(e);
+    }
+
     return (
         <div id="route-contents" style={{background: '#F5F7F9'}}>
             <div className="container">
                 <h2>솔루션 소개</h2>
 
                 <ul className="top-nav">
-                    {solution.map((ele) => {
+                    {solution?.map((ele) => {
                         return (
                             <li
                                 id={ele.solutionId}
+                                data-name={ele.solutionName}
                                 key={ele.solutionId}
-                                className={ele.solutionId == selectedNav ? "selected" : ""}
+                                className={ele.solutionId == selectedNav.id ? "selected" : ""}
                                 onClick={changeSolution}
                             >{ele.solutionName}
                             </li>
@@ -113,16 +124,16 @@ function Solution({userInfo}) {
                 <div className="section-header">솔루션 주요기능</div>
                 <div className="solution-contents">
                     <div className="custom-slider">
-                        <SolutionSlider solutionId={selectedNav}/>
+                        <SolutionSlider solutionId={selectedNav.id}/>
                     </div>
 
                     <div className="section2">
                         <h4 className="sec_title">
-                            {solutionInfo[selectedNav]}
+                            {solutionInfo[selectedNav.id]}
                         </h4>
                         <ul className="solution-detail">
                             {solution
-                                .find(ele => ele.solutionId == selectedNav)
+                                .find(ele => ele.solutionId == selectedNav.id)
                                 ?.detail
                                 .map(ele => {
                                     return (
@@ -160,6 +171,7 @@ function Solution({userInfo}) {
                                             </dl>
                                             <div className="question-wrap">
                                                 <button
+                                                    data-name={m.name}
                                                     className="btn-question"
                                                     onClick={openModal}
                                                 >{m.btn}</button>
