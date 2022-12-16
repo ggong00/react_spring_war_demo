@@ -60,8 +60,40 @@ function Question({data, id, userInfo, type}) {
             .catch(error => {console.log(error)});
     }
 
+    const cardStyle = {
+        background: '#f5f7f9', padding: '1em', border: '0', borderRadius: '.5em',
+        // display: 'flex',
+    }
+
     return (
-        <form className="form-box" onSubmit={handleSubmit(onsubmit)}>
+        <form className="form-box form-box2" onSubmit={handleSubmit(onsubmit)}>
+            <div className="input-box">
+                <ol className="type_info">
+                    <li style={{paddingRight: '1em'}}>
+                        <h5 style={{fontSize: '1.5em', marginBottom: '1em'}}>선재하이테크</h5>
+
+                        <div>
+                            <h6 style={{fontSize: '1.125em'}}>제품 유형</h6>
+
+                            <dl className="type_list">
+                                <dd><input type="radio" name="" /> 체험상품</dd>
+                                <dd><input type="radio" name="" /> Basic</dd>
+                                <dd><input type="radio" name="" /> Premium</dd>
+                                <dd><input type="radio" name="" /> 맞춤형 상품</dd>
+                            </dl>
+                        </div>
+
+                    </li>
+                    <li style={{paddingLeft: '1em'}}>
+                        <div className="cost_info" style={cardStyle}>
+                            <p><span style={{marginTop: '.25em'}}>비용</span> <b className="costVal">0$</b></p>
+                        </div>
+                        <span style={{marginTop: '.5em', fontSize: '.875em', color: '#888', textAlign: 'right'}}>※설치비 및 부가세 별도</span>
+                    </li>
+                </ol>
+            </div>
+            
+            
             <div className="input-box category">
                 <div className="title">관심 제품 선택</div>
 
