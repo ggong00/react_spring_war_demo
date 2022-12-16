@@ -30,6 +30,7 @@ public class LicenseQuestion {
     private String contents;
     private LocalDateTime createDtm;
     private String resYn;
+    private String licenseType;
 
     public LicenseQuestionDTO.LicenseQuestionRes toLicenseQuestionRes () {
         return LicenseQuestionDTO.LicenseQuestionRes
@@ -47,6 +48,7 @@ public class LicenseQuestion {
                 .contents(this.contents)
                 .resYn(this.resYn)
                 .createDtm(this.createDtm.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .licenseType(this.licenseType)
                 .build();
     }
 }

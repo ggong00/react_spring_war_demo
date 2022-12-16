@@ -28,7 +28,6 @@ function Management({type}) {
         { field: "position", headerName: "직책", flex: 1, filter: false },
         { field: "tel", headerName: "전화번호", flex: 1, filter: false },
         { field: "solutionName", headerName: "신청 솔루션", flex: 1, filter: false },
-        // { field: "createDtm", headerName: "등록일", flex: 1, filter: false },
         { field: "resYn", headerName: "상태", flex: 1, filter: false },
     ];
 
@@ -38,17 +37,17 @@ function Management({type}) {
         { field: "position", headerName: "직책", flex: 1, filter: false },
         { field: "tel", headerName: "전화번호", flex: 1, filter: false },
         { field: "solutionName", headerName: "신청 솔루션", flex: 1, filter: false },
-        // { field: "createDtm", headerName: "등록일", flex: 1, filter: false },
+        { field: "licenseType", headerName: "신청 라이선스", flex: 1, filter: false },
         { field: "resYn", headerName: "상태", flex: 1, filter: false },
     ];
 
     const getData = () => {
         let url = '';
 
-        if(type == 'question') {
+        if(type == 'mgm-question') {
             url = `/api/admin/question?status=${selectStatus}`;
 
-        } else if(type == 'license') {
+        } else if(type == 'mgm-license') {
             url = `/api/admin/license_question?status=${selectStatus}`;
         }
 
@@ -122,8 +121,8 @@ function Management({type}) {
             <div className="container">
                 <h2>
                     {
-                        type == 'question' ? '문의글 관리' :
-                        type == 'license' ? '라이선스 관리' : "문의글 관리"
+                        type == 'mgm-question' ? '문의글 관리' :
+                        type == 'mgm-license' ? '라이선스 관리' : "문의글 관리"
                     }
                 </h2>
                 <div className="management-contents">
@@ -137,7 +136,7 @@ function Management({type}) {
                         <div className="ag-theme-alpine"  style={{ width: "100%", height: "700px" }}>
                             <AgGridReact
                                 rowData={data}
-                                columnDefs={type == 'question' ? questionColumnDefs : licenseColumnDefs}
+                                columnDefs={type == 'mgm-question' ? questionColumnDefs : licenseColumnDefs}
                                 pagination={true}
                                 paginationPageSize={25}
                                 onCellClicked={cellClickHandler}

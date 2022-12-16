@@ -38,10 +38,10 @@ function ManagementModal({data, reload, type}) {
 
     return (
         <>
-            <Question data={data} type="management"/>
+            <Question data={data} mode="management" type={type}/>
             {/* {data.resYn == '신규' && !isUserDupl && <CreateUser data={data} reset={reset}/>} */}
-            {data.resYn == '신규' && type == 'license' && <CreateLicense data={data} reload={reload}/>}
-            {data.resYn == '신규' && type == 'question' && <SendMail data={data} reload={reload}/>}
+            {data.resYn == '신규' && type == 'mgm-license' && <CreateLicense data={data} reload={reload}/>}
+            {data.resYn == '신규' && type == 'mgm-question' && <SendMail data={data} reload={reload}/>}
         </>
     );
 }

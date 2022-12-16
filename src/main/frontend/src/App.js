@@ -89,8 +89,8 @@ function App() {
           <Route path="/solution" element={<Solution userInfo={userInfo}/>} />
           <Route path="/question" element={<QuestionPage userInfo={userInfo}/>} />
           <Route path="/my_license" element={<MyLicense userInfo={userInfo} reloadUserInfo={reloadUserinfo}/>} />
-          <Route path="/admin/management/question" element={<Management userInfo={userInfo} type="question"/>} />
-          <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="license"/>} />
+          <Route path="/admin/management/question" element={<Management userInfo={userInfo} type="mgm-question"/>} />
+          <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="mgm-license"/>} />
           <Route path="/login" element={<Login setSelectedMenu={setSelectedMenu}/>} />
           <Route path="/join" element={<Join setSelectedMenu={setSelectedMenu}/>} />
           <Route path="/system" element={<System setSelectedMenu={setSelectedMenu}/>} />

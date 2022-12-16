@@ -1,14 +1,18 @@
 package com.atech.backend.dto;
 
+import com.atech.backend.repository.license.License;
 import com.atech.backend.repository.license_question.LicenseQuestion;
 import com.atech.backend.repository.solution.Solution;
 import com.atech.backend.repository.user.User;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 public class LicenseQuestionDTO {
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @Builder
     public static class LicenseQuestionRes {
@@ -25,6 +29,8 @@ public class LicenseQuestionDTO {
         private String contents;
         private String resYn;
         private String createDtm;
+        private String licenseType;
+        private List<License> license;
     }
 
     @Getter

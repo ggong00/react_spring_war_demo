@@ -39,6 +39,14 @@ spring:
 
 ---
 
+# 스프링 시큐리티 타임아웃 설정
+server:
+  servlet:
+    session:
+      timeout: 3600
+
+---
+
 spring:
   profiles:
     active: prod

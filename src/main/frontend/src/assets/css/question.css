@@ -144,6 +144,18 @@
     margin: 0 12px;
 }
 
+/* 문의글 관리 라이선스 정보 */
+.mgm-license-info {
+    position: absolute;
+    right: 40px;
+    padding: 12px;
+    background-color: rgba(94, 99, 93, 0.192);
+    border-radius: 6px;
+}
+.mgm-license-info .li{
+    text-align: start;
+}
+
 .type_list {display: flex; margin-top: .5em; }
 .type_list dd {margin-left: 1em; display: flex; align-items: center; }
 .type_list dd:first-child {margin-left: 0; }

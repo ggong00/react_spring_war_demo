@@ -6,7 +6,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import QuestionFooter from "./QuestionFooter";
 
-function Question({data, id, name, userInfo, licenseInfo, changeModal, type}) {
+function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,type}) {
     const [ solutionList, setSolutionList ] = useState([]);
     const { register, handleSubmit, reset, control,formState: { isSubmitting, isDirty, errors }} = useForm({
         defaultValues: useMemo(() => userInfo),
@@ -155,28 +155,43 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, type}) {
             }
             
             { 
-                type == 'question' || type == 'management' ? 
-                <div className="input-box category">
-                    <div className="title">관심 제품 선택</div>
+                type == 'question' || mode == 'management' ? 
+                <>
+                    <ul className={type == 'mgm-license' ? "mgm-license-info" : ""}>
+                        <li>{data?.licenseType}</li>
+                        {data?.license?.map(ele => {
 
-                    <div className="inner-input">
-                        {!data ? (solutionList.map((ele) => {
                             return (
-                                <div className="input" key={ele.solutionId}>
-                                    <input
-                                        id={"solution-" + ele.solutionId}
-                                        type="radio"
-                                        name="solution"
-                                        value={ele.solutionId}
-                                        defaultChecked={id ? ele.solutionId == id && true : ele.solutionId == 1 && true}
-                                        {...register("solutionId")}
-                                    />
-                                    <label htmlFor={"solution-" + ele.solutionId}>{ele.solutionName}</label>
-                                </div>
+                                <li>
+                                    <span>{`${data.licenseType === 'trial' ? '0$' : ele.type}`} / </span>
+                                    <span>{`${data.licenseType === 'trial' ? '무료 체험' : ele[data.licenseType]}`}</span>
+                                </li>
                             )
-                        })) : (<div className="selected-solution">{data.solutionName}</div>)}
+                        })}
+                    </ul>
+                    <div></div>
+                    <div className="input-box category">
+                        <div className="title">관심 제품 선택</div>
+
+                        <div className="inner-input">
+                            {!data ? (solutionList.map((ele) => {
+                                return (
+                                    <div className="input" key={ele.solutionId}>
+                                        <input
+                                            id={"solution-" + ele.solutionId}
+                                            type="radio"
+                                            name="solution"
+                                            value={ele.solutionId}
+                                            defaultChecked={id ? ele.solutionId == id && true : ele.solutionId == 1 && true}
+                                            {...register("solutionId")}
+                                        />
+                                        <label htmlFor={"solution-" + ele.solutionId}>{ele.solutionName}</label>
+                                    </div>
+                                )
+                            })) : (<div className="selected-solution">{data.solutionName}</div>)}
+                        </div>
                     </div>
-                </div> : null
+                </> : null
             }
 
             <div className="input-box text">
@@ -195,7 +210,7 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, type}) {
                 {/*</div>*/}
 
                 {
-                    type == 'question' || type == 'management' ? 
+                    type == 'question' || mode == 'management' ? 
                     <>
                         <div className="input_group">
                             <label htmlFor="belong" className="title">회사명</label>
