@@ -2,6 +2,7 @@ package com.atech.backend.repository.solution;
 
 import com.atech.backend.repository.license.License;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class SolutionDAOImpl implements SolutionDAO {
 
     private final JdbcTemplate jdbcTemplate;
@@ -29,6 +31,8 @@ public class SolutionDAOImpl implements SolutionDAO {
 
     @Override
     public void updateSolution(Solution solution) {
+        log.info("solution {}", solution);
+
         StringBuffer sql = new StringBuffer();
         sql.append(" UPDATE solution ");
         sql.append(" SET solution_name = ? ");
@@ -44,7 +48,7 @@ public class SolutionDAOImpl implements SolutionDAO {
     @Override
     public void deleteSolution(Solution solution) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" DELETE solution ");
+        sql.append(" DELETE from solution ");
         sql.append(" where solution_id = ? ");
 
         jdbcTemplate.update(
@@ -82,6 +86,8 @@ public class SolutionDAOImpl implements SolutionDAO {
 
     @Override
     public void updateDetail(Detail detail) {
+        log.info("update detail {}", detail);
+
         StringBuffer sql = new StringBuffer();
         sql.append(" UPDATE detail ");
         sql.append(" SET contents = ? ");
@@ -97,7 +103,7 @@ public class SolutionDAOImpl implements SolutionDAO {
     @Override
     public void deleteDetail(Detail detail) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" DELETE detail ");
+        sql.append(" DELETE from detail ");
         sql.append(" where detail_id = ? ");
 
         jdbcTemplate.update(
@@ -108,6 +114,9 @@ public class SolutionDAOImpl implements SolutionDAO {
 
     @Override
     public void insertDetail(Long solutionId, Detail detail) {
+        log.info("insert detail {}", detail);
+        log.info("insert solutionId {}", solutionId);
+
         StringBuffer sql = new StringBuffer();
         sql.append(" INSERT INTO detail (solution_id, contents)");
         sql.append(" values(?,?) ");
@@ -137,11 +146,11 @@ public class SolutionDAOImpl implements SolutionDAO {
     @Override
     public void updateLicense(License license) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" UPDATE license ");
-        sql.append(" SET basic = ? ");
-        sql.append(" SET premium = ? ");
-        sql.append(" SET custom = ? ");
-        sql.append(" SET type = ? ");
+        sql.append(" UPDATE license SET");
+        sql.append(" basic = ?, ");
+        sql.append(" premium = ?, ");
+        sql.append(" custom = ?, ");
+        sql.append(" type = ? ");
         sql.append(" where license_id = ? ");
 
         jdbcTemplate.update(
@@ -157,7 +166,7 @@ public class SolutionDAOImpl implements SolutionDAO {
     @Override
     public void deleteLicense(License license) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" DELETE license ");
+        sql.append(" DELETE from license ");
         sql.append(" where license_id = ? ");
 
         jdbcTemplate.update(

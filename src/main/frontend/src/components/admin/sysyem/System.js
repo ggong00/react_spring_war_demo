@@ -5,7 +5,7 @@ import UserManagement from "./user-management/UserManagement";
 import LicenseManagement from "./licnese-management/LicenseManagement";
 import "../../../assets/css/system.css"
 
-function System({setSelectedMenu}) {
+function System() {
     const [selectedSystemMenu, setSelectedSystemMenu] = useState({id: 'SolutionManagement', name: '솔루션 관리'});
     const navigate = useNavigate();
 
@@ -15,7 +15,6 @@ function System({setSelectedMenu}) {
             navigate('/');
         }
 
-        setSelectedMenu("system");
     }, [selectedSystemMenu])
 
     const changeMenu = ({target})  => {

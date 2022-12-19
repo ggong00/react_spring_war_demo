@@ -23,7 +23,7 @@ function SolutionManagement({solution, reload}) {
         setChangedSolution(tmpSolution);
     }
 
-    const detaildelete = () => {
+    const detaildelete = (e) => {
         const tmpSolution = {...changedSolution};
         const tmpDetail = [];
         tmpSolution.detail.forEach(ele2 => {
@@ -32,10 +32,12 @@ function SolutionManagement({solution, reload}) {
             }
         })
         tmpSolution.detail = tmpDetail;
-        setChangedSolution(tmpSolution)
+        setChangedSolution(tmpSolution);
     };
 
     const onSubmit = (data) => {
+        console.log(changedSolution.detail)
+
         const postLicense = changedSolution.license.map(ele => {
             return {
                     licenseId: ele.licenseId,
@@ -48,12 +50,10 @@ function SolutionManagement({solution, reload}) {
 
         const patchData = {
             solutionId: changedSolution.solutionId,
-            solutionName: changedSolution.solutionName,
+            solutionName: data.solutionName,
             detail: changedSolution.detail,
             license: postLicense,
         }
-
-        console.log(patchData)
 
         // 변경사항 전송
         fetch("/api/solution", {
@@ -66,8 +66,9 @@ function SolutionManagement({solution, reload}) {
         .then((res) => res.json())
         .then((json) => {
                 if (json.code == "00") {
+                    alert('수정이 완료되었습니다.');
+                    reload();
                 }
-
             }
         )
         .catch(error => {console.log(error)});
@@ -113,9 +114,9 @@ function SolutionManagement({solution, reload}) {
                     />
                 </li>
             </ul>
-            <div className="btn-wrap">
-                <button className="add" onClick={addDetail}>추가</button>
-                <button className="delete" onClick={detaildelete} >삭제</button>
+            <div className="button-wrap">
+                <button type="button" className="add" onClick={addDetail}>추가</button>
+                <button type="button" className="delete" onClick={detaildelete} >삭제</button>
             </div>
         </div>
         

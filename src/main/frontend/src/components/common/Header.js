@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 
-function Header({menu, selectedMenu, setSelectedMenu}) {
+function Header({menu}) {
     const navigate = useNavigate();
 
     const onLogout = () => {
@@ -23,9 +23,6 @@ function Header({menu, selectedMenu, setSelectedMenu}) {
                 }
             });
     }
-    const changeMenu = (e) => {
-        setSelectedMenu(e.target.id);
-    }
 
     return (
         <div className="navbar-wrap">
@@ -45,8 +42,7 @@ function Header({menu, selectedMenu, setSelectedMenu}) {
                                         <Link
                                             to={menu.url}
                                             id={menu.id}
-                                            onClick={changeMenu}
-                                            className={selectedMenu == menu.id ? "selected-menu" : ""}
+                                            className={window.location.pathname == menu.url ? "selected-menu" : ""}
                                         >
                                             {menu.name}
                                         </Link>
@@ -72,10 +68,10 @@ function Header({menu, selectedMenu, setSelectedMenu}) {
                                     <li>
                                         <a onClick={onLogout}>로그아웃</a>
                                     </li>
-                                    {/* {localStorage.getItem("role") == "ROLE_ADMIN" &&
+                                    {localStorage.getItem("role") == "ROLE_ADMIN" &&
                                      <li>
                                         <Link to="/system">사이트 관리</Link>
-                                    </li>} */}
+                                    </li>}
                                 </>
                             )}
                         </ul>

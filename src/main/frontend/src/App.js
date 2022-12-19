@@ -20,7 +20,7 @@ function App() {
   const [selectedMenu, setSelectedMenu] = useState();
 
   useEffect(() => {
-
+ 
     // 서버세션 확인
     loginChk();
 
@@ -91,9 +91,9 @@ function App() {
           <Route path="/my_license" element={<MyLicense userInfo={userInfo} reloadUserInfo={reloadUserinfo}/>} />
           <Route path="/admin/management/question" element={<Management userInfo={userInfo} type="mgm-question"/>} />
           <Route path="/admin/management/license" element={<Management userInfo={userInfo} type="mgm-license"/>} />
-          <Route path="/login" element={<Login setSelectedMenu={setSelectedMenu}/>} />
-          <Route path="/join" element={<Join setSelectedMenu={setSelectedMenu}/>} />
-          <Route path="/system" element={<System setSelectedMenu={setSelectedMenu}/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/system" element={<System />} />
         </Routes>
         <Footer/>
       </div>

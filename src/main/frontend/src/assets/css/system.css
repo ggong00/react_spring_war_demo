@@ -2,11 +2,15 @@
 .system {
     height: 800px;
     width: 1200px;
-    font-size: 20px;
+    font-size: 14px;
     margin:  84px auto;
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr;
+}
+.system .modal main form {
+    width: 60%;
+    margin: 22px auto;
 }
 .system .title {
     text-align: start;
@@ -88,17 +92,14 @@
 }
 
 /* 솔루션 모달 */
-.solution-management .modal main {
-    padding: 24px;
-}
 .solution-management .modal main .title{
-    font-size: 24px;
+    font-size: 1.4em;
 }
 .solution-management .mgm-detail {
     display: flex;
     flex-direction: column;
 }
-.solution-management .btn-wrap {
+.solution-management .button-wrap {
     display: flex;
 }
 .solution-management .mgm-detail .detail-li{

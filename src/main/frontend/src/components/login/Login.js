@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../../assets/css/login.css";
 
-function Login({setSelectedMenu}) {
+function Login() {
     const { register, handleSubmit, formState: { isSubmitting, isDirty, errors }} = useForm();
     const navigate = useNavigate();
 
@@ -13,7 +13,6 @@ function Login({setSelectedMenu}) {
             navigate('/');
         }
 
-        setSelectedMenu("login");
     }, [])
 
     const onSubmit = (formData) => {

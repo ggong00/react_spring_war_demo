@@ -18,8 +18,8 @@ spring:
   mail:
     host: ezsmtp.bizmeka.com
     port: 25
-    username: dev@atech1221.com
-    password: Dpdlxpzm1221!@
+    username: 임시
+    password: 임시
     properties:
       mail:
         smtp:

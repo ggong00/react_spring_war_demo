@@ -145,7 +145,7 @@ function Management({type}) {
                                 }
                             />
                         </div>
-                    </div>y
+                    </div>
                 </div>
             </div>
 

@@ -44,6 +44,19 @@ public class SolutionServiceImpl implements SolutionService{
         //솔루션 수정
         solutionDAO.updateSolution(solutionReq.toEntity());
 
+        //디테일 삭제
+        List<Detail> allDetail = solutionDAO.findAllDetail(solutionReq.getSolutionId());
+        List<Detail> deleteList = allDetail.stream().filter(oldDetail -> {
+            boolean result = true;
+            for (Detail newDetail : solutionReq.getDetail()) {
+                if (oldDetail.getDetailId().equals(newDetail.getDetailId())) {
+                    result = false;
+                }
+            }
+            return result;
+        }).collect(Collectors.toList());
+        deleteList.stream().forEach(detail -> solutionDAO.deleteDetail(detail));
+
         //디테일 수정 / 추가
         solutionReq.getDetail().stream().forEach(detail -> {
             if(detail.getDetailId() > 0) {
@@ -53,7 +66,7 @@ public class SolutionServiceImpl implements SolutionService{
             }
         });
 
-        //라이선스 수정 / 추가
+        //라이선스 수정 / 추가? / 삭제?
         solutionReq.getLicense().stream().forEach(license -> {
             if(license.getLicenseId() > 0) {
                 solutionDAO.updateLicense(license);

@@ -6,7 +6,7 @@ import 'react-phone-number-input/style.css'
 import '../../assets/css/join.css'
 import PhoneInput from 'react-phone-number-input'
 
-function Join({setSelectedMenu}) {
+function Join() {
     const { register, handleSubmit, reset, control, watch, getValues, formState: { isSubmitting, isDirty, errors }} = useForm();
     const [ mailSuccess, setMailSuccess] = useState();
     const [ idSuccess, setIdSuccess] = useState();
@@ -26,7 +26,6 @@ function Join({setSelectedMenu}) {
             navigate("/");
         }
 
-        setSelectedMenu("join");
     }, [idSuccess, mailSuccess])
 
     const onSubmit = (formData) => {
