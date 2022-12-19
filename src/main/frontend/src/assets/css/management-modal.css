@@ -1,35 +1,41 @@
 .user-form {
-    width: 60%;
-    margin: 22px auto;
+    /*width: 60%;*/
+    /*margin: 22px auto;*/
+    position: relative; max-width: calc(100% - 5em); margin: 2em auto;
 }
+/*.user-form:before {display: block; content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 3px; border-bottom: 1px dashed #ddd;  }*/
+
 .user-form input {
-    padding: 8px;
+    /*padding: 8px;*/
     width: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(93, 97, 105, 0.38);
-    display: inline-block;
+    /*border-radius: 12px;*/
+    /*border: 1px solid rgba(93, 97, 105, 0.38);*/
+    /*display: inline-block;*/
 }
 .user-form textarea {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
     height: 120px;
-    border-radius: 12px;
-    border: 1px solid rgba(93, 97, 105, 0.38);
-    padding: 8px
+    /*border-radius: 12px;*/
+    border: 1px solid #e3e3e3;
+    /*padding: 8px*/
 }
 .user-form input[type='file'] {
-    border: none;
-    padding-top: 2px;
-    padding-bottom: 0;
+    /*border: none;*/
+    /*padding-top: 2px;*/
+    /*padding-bottom: 0;*/
 }
 .user-form input:focus {
     outline: none;
 }
 .user-form .form-header {
     margin: 12px 0;
-    display: flex;
-    justify-content: flex-start;
+    display: flex; justify-content: flex-start;
+    font-size: 1.25em;
+    position: relative; padding-top: 1em;
 }
+.user-form .form-header:before {display: block; content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 1px; border-bottom: 1px dashed #ddd; }
+
 .user-form .form-header .form-title {
     display: flex;
     justify-content: flex-start;
@@ -45,16 +51,17 @@
 .user-form .form-main .input {
     display: flex;
     justify-content: flex-start;
-    width: 80%;
-    margin: 12px 0;
+    /*width: 80%;*/
+    margin: .5em 0;
 }
 .user-form .form-main label {
     display: inline-block;
     width: 80px;
-    margin: 0 12px;
+    /*margin: 0 12px;*/ margin-top: .65em;
     color: #5d6169;
     text-align: start;
 }
+.user-form .form-main label.essential {margin-top: .25em; }
 .user-form .form-main label.essential:after {
     content: "*";
     color: var(--main-bg-color);

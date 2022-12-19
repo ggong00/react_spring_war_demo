@@ -28,7 +28,6 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                 setSolutionList(json.data);
             }
         });
-
     }, []);
 
     // 문의글 작성
@@ -148,7 +147,7 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                                     </dl>
                                 </div>
                             </div>
-                            <span style={{marginTop: '.5em', fontSize: '.875em', color: '#888', textAlign: 'right'}}>※설치비 및 부가세 별도</span>
+                            <span style={{marginTop: '.25em', fontSize: '.875em', color: '#888', fontWeight: '400', textAlign: 'right', display: 'block'}}>※설치비 및 부가세 별도</span>
                         </li>
                     </ol>
                 </div> : null
@@ -171,7 +170,7 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                     </ul>
                     <div></div>
                     <div className="input-box category">
-                        <div className="title">관심 제품 선택</div>
+                        <div className="title">{type === 'mgm-question' ? '선택 제품' : '관심 제품 선택'}</div>
 
                         <div className="inner-input">
                             {!data ? (solutionList.map((ele) => {
@@ -194,21 +193,8 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                 </> : null
             }
 
-            <div className="input-box text">
-                {/*<div className="title">소속</div>*/}
-                {/*<div className="input">*/}
-                {/*    <input*/}
-                {/*        id="belong"*/}
-                {/*        type="text"*/}
-                {/*        name="belong"*/}
-                {/*        disabled={data && true}*/}
-                {/*        defaultValue={data ? data.belong : userInfo?.belong}*/}
-                {/*        {...register("belong", {*/}
-                {/*            required: "소속을 입력해주세요.",*/}
-                {/*        })}*/}
-                {/*    />*/}
-                {/*</div>*/}
 
+            <div className={type === 'mgm-question' || type === 'mgm-license' ? 'input-box text input_flex' : 'input-box text'}>
                 {
                     type == 'question' || mode == 'management' ? 
                     <>
@@ -314,7 +300,7 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                     : null
                 }
 
-                <div className="input_group">
+                <div className="input_group" style={type === 'mgm-question' || type === 'mgm-license' ? {width: '100%'} : {}}>
                     <label htmlFor="title" className="title">제목</label>
                     <input
                         className="form_control"
@@ -332,7 +318,7 @@ function Question({data, id, name, userInfo, licenseInfo, changeModal, mode ,typ
                     </div>
                 </div>
 
-                <div className="input_group">
+                <div className="input_group" style={type === 'mgm-question' || type === 'mgm-license' ? {width: '100%', height: 'auto'} : {}}>
                     <label htmlFor="contents" className="title">내용</label>
                     <textarea
                         className="form_control"

@@ -86,6 +86,7 @@ function CreateLicense({data, reload}) {
                     <div className="input">
                         <label className="essential">아이디</label>
                         <input
+                            className="form_control"
                             type="text"
                             name="siteId"
                             autoComplete="off"
@@ -97,6 +98,7 @@ function CreateLicense({data, reload}) {
                     <div className="input">
                         <label className="essential">비밀번호</label>
                         <input
+                            className="form_control"
                             type="text"
                             name="sitePass"
                             autoComplete="off"
@@ -108,6 +110,7 @@ function CreateLicense({data, reload}) {
                     <div className="input">
                         <label className="essential">주소</label>
                         <input
+                            className="form_control"
                             type="text"
                             name="siteUrl"
                             autoComplete="off"
@@ -125,6 +128,7 @@ function CreateLicense({data, reload}) {
                     <div className="input">
                         <label>제목</label>
                         <input
+                            className="form_control"
                             type="text"
                             name="mailTitle"
                             autoComplete="off"
@@ -136,6 +140,7 @@ function CreateLicense({data, reload}) {
                     <div className="input">
                         <label>내용</label>
                         <textarea
+                            className="form_control"
                             type="text"
                             name="message"
                             placeholder={`기본 : ${defaultMailMsg.message}`}
@@ -146,6 +151,7 @@ function CreateLicense({data, reload}) {
                     <div className="input file">
                         <label>첨부파일</label>
                         <input
+                            className="form_control"
                             type="file"
                             multiple={true}
                             name="attachFileList"
@@ -156,15 +162,15 @@ function CreateLicense({data, reload}) {
                     </div>
                 </div>    
 
-                <div className="button-wrap">
+                <div className="button-wrap" style={{display: 'flex', justifyContent: "space-between", marginTop: '2em'}}>
                     <Button
                         title="라이선스 지급"
                         backgroundColor="var(--main-bg-color)"
                     />
                     <Button
-                        title="삭제"
+                        title="닫기"
                         onClick={onDelete}
-                        backgroundColor="red"
+                        backgroundColor="#555"
                     />
                 </div>
             </form>

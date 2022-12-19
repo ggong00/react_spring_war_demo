@@ -76,6 +76,7 @@ function SendMail({data, reload}) {
                     <div className="input">
                         <label>제목</label>
                         <input
+                            className="form_control"
                             type="text"
                             name="mailTitle"
                             autoComplete="off"
@@ -87,6 +88,7 @@ function SendMail({data, reload}) {
                     <div className="input">
                         <label>내용</label>
                         <textarea
+                            className="form_control"
                             type="text"
                             name="message"
                             {...register("message", {
@@ -97,6 +99,7 @@ function SendMail({data, reload}) {
                     <div className="input file">
                         <label>첨부파일</label>
                         <input
+                            className="form_control"
                             type="file"
                             multiple={true}
                             name="attachFileList"
@@ -107,15 +110,15 @@ function SendMail({data, reload}) {
                     </div>
                 </div>    
 
-                <div className="button-wrap">
+                <div className="button-wrap" style={{marginTop: '2em', display: 'flex', justifyContent: 'space-between'}}>
                     <Button
                         title="메일 전송"
                         backgroundColor="var(--main-bg-color)"
                     />
                     <Button
-                        title="삭제"
+                        title="닫기"
                         onClick={onDelete}
-                        backgroundColor="red"
+                        backgroundColor="#555"
                     />
                 </div>
             </form>

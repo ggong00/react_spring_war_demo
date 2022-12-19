@@ -22,7 +22,7 @@
     /*padding: 0 12px;*/
     font-weight: 400; margin-bottom: .75em;
 }
-.form_control {padding: .5em .75em; font-family: 'Pretendard'; font-size: 1em; color: #333; }
+.form_control {padding: .5em .75em; font-family: 'Pretendard'; font-size: 1em; color: #333; display: flex; }
 .input_group {margin-top: .75em; }
 .input_group label {margin-bottom: 0 !important; }
 .input_group input, .input_group textarea {width: 100%; }
@@ -141,7 +141,7 @@
 .selected-solution {
     width: 100%;
     text-align: start;
-    margin: 0 12px;
+    padding: .5em .75em; border: 1px solid #ddd; border-radius: .25em; background: #efefef;
 }
 
 /* 문의글 관리 라이선스 정보 */
@@ -160,3 +160,11 @@
 .type_list dd {margin-left: 1em; display: flex; align-items: center; }
 .type_list dd:first-child {margin-left: 0; }
 .type_list dd input {margin-right: .25em; width: 20px; height: 20px; }
+
+.cost_info dl dd {font-size: .875em; color: #888; }
+.cost_info dl dd .cost {font-size: 1.875em; color: #000; }
+
+
+.input_flex {display: flex; margin-left: -.5em; margin-right: -.5em; }
+.input_flex .input_group {width: calc(33.333% - 1em); margin-left: .5em; margin-right: .5em;  }
+.input_flex .input_group textarea {height: auto; }
